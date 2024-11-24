@@ -14,6 +14,7 @@ export default {
       colors: {
         // Configure your color palette here
         'ghmPurple': {
+          100: "#FFF5FC",
           200: "#EEDCE8",
           300: '#A9518B',
           400: '#C68BB2',
@@ -23,6 +24,7 @@ export default {
         },
         'ghmBlack': '#0B0B0B',
         'ghmGrey': {
+          400: '#FAFAFA',
           500: '#6D6D6D',
           700: '#363636',
           800: '#212121'

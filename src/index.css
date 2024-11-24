@@ -20,3 +20,7 @@
 .ghm-bg-card-gradient {
   @apply bg-gradient-to-b from-ghmPink-700 to-ghmPurple-500;
 }
+
+.ghm-table-row {
+  @apply p-4 border-b;
+}

@@ -6,10 +6,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "../styles/retailPlansCarousel.css";
 import goldIcon from "../assets/svg/gold.svg";
+import pearlIcon from "../assets/svg/pearl.svg";
+import rubyIconPoular from "../assets/svg/ruby-popular.svg";
+import rubyIcon from "../assets/svg/ruby.svg";
 import checkWhite from "../assets/svg/check-circle-white.svg";
 import checkPurple from "../assets/svg/check-circle-purple.svg";
 
 type Plan = {
+  icon: string;
   title: string;
   price: string;
   features: string[];
@@ -18,45 +22,48 @@ type Plan = {
 
 const plans: Plan[] = [
   {
+    icon: goldIcon,
     title: "Gold",
     price: "₦75,600",
     features: [
       "Roam across 700+ Hospitals",
       "In-patient care with feeding-General ward",
-      "Surgical benefit up to the limit of #200,000",
-      "Dental care Benefit up to the limit of #20,000",
-      "Optical care Benefit (includes biennial lens and frame up to the limit of #12,500)",
-      "Maternal care benefit up to #200,000",
+      "Surgical benefit up to the limit of ₦200,000",
+      "Dental care Benefit up to the limit of ₦20,000",
+      "Optical care Benefit (includes biennial lens and frame up to the limit of ₦12,500)",
+      "Maternal care benefit up to ₦200,000",
       "5 Physiotherapy Sessions",
       "Accident & Emergency benefit",
       "Consultation with core and Non core Specialist",
     ],
   },
   {
+    icon: pearlIcon,
     title: "Pearl",
     price: "₦125,600",
     features: [
       "Roam across 800+ Hospitals",
       "In-patient care with feeding- Semi-private ward",
-      "Surgical benefit up to the limit of #300,000",
-      "Dental care Benefit up to the limit of #30,000",
-      "Optical care Benefit (includes biennial lens and frame up to the limit of #15,000)",
-      "Maternal care benefit up to #300,000",
+      "Surgical benefit up to the limit of ₦300,000",
+      "Dental care Benefit up to the limit of ₦30,000",
+      "Optical care Benefit (includes biennial lens and frame up to the limit of ₦15,000)",
+      "Maternal care benefit up to ₦300,000",
       "7 Physiotherapy Sessions",
       "Accident & Emergency benefit",
       "Consultation with core and Non core Specialist",
     ],
   },
   {
+    icon: rubyIconPoular,
     title: "Ruby",
     price: "₦205,600",
     features: [
       "Roam across 1000+ Hospitals",
       "In-patient care with feeding- Private ward",
-      "Surgical benefit up to the limit of #450,000",
-      "Dental care Benefit up to the limit of #40,000",
-      "Optical care Benefit (includes biennial lens and frame up to the limit of #25,000)",
-      "Maternal care benefit up to #500,000",
+      "Surgical benefit up to the limit of ₦450,000",
+      "Dental care Benefit up to the limit of ₦40,000",
+      "Optical care Benefit (includes biennial lens and frame up to the limit of ₦25,000)",
+      "Maternal care benefit up to ₦500,000",
       "10 Physiotherapy Sessions",
       "Accident & Emergency benefit",
       "Consultation with core and Non core Specialist",
@@ -64,16 +71,17 @@ const plans: Plan[] = [
     isPopular: true,
   },
   {
-    title: "Pearl",
-    price: "₦125,600",
+    icon: rubyIcon,
+    title: "Ruby Plus",
+    price: "₦457,600",
     features: [
-      "Roam across 800+ Hospitals",
-      "In-patient care with feeding- Semi-private ward",
-      "Surgical benefit up to the limit of #300,000",
-      "Dental care Benefit up to the limit of #30,000",
-      "Optical care Benefit (includes biennial lens and frame up to the limit of #15,000)",
-      "Maternal care benefit up to #300,000",
-      "7 Physiotherapy Sessions",
+      "Roam across 1000+ Hospitals",
+      "In-patient care with feeding- Private ward",
+      "Surgical benefit up to the limit of ₦1,000,000",
+      "Dental care Benefit up to the limit of ₦70,000",
+      "Optical care Benefit (includes biennial lens and frame up to the limit of ₦40,000)",
+      "Maternal care benefit up to ₦750,000",
+      "15 Physiotherapy Sessions",
       "Accident & Emergency benefit",
       "Consultation with core and Non core Specialist",
     ],
@@ -133,7 +141,7 @@ const RetailPlansCarousel: React.FC = () => {
               <span className="flex items-center mb-8">
                 <div>
                   {" "}
-                  <img src={goldIcon} alt="Icon" />
+                  <img src={plan.icon} alt="Icon" />
                 </div>
 
                 {plan.isPopular && (

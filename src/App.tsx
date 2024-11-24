@@ -10,22 +10,44 @@ import Header from "./components/Header";
 import About from "./pages/About";
 import Plans from "./pages/Plans";
 import IndividualPlan from "./pages/IndividualPlan";
+import FullPlanDetails from "./pages/FullPlanDetails";
+import StudentPlan from "./pages/StudentPlan";
+import CorporatePlan from "./pages/CorporatePlan";
+import Contact from "./pages/Contact";
+import ProvidersList from "./pages/ProvidersList";
+import PurchasePlan from "./pages/PurchasePlan";
+import ScrollToTop from "./utils/ScrollToTop";
+import {FamilyProvider} from "./contexts/FamilyContext";
 
 function App() {
   return (
     <>
-      <Router>
-        <div className="font-onest">
-          <DynamicHeader />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="plans" element={<Plans />} />
-            <Route path="plans/retail" element={<IndividualPlan />} />
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
+      <FamilyProvider>
+        <Router>
+          <div className="font-onest">
+            <DynamicHeader />
+            <ScrollToTop>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="about" element={<About />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="providers-list" element={<ProvidersList />} />
+                <Route path="plans" element={<Plans />} />
+                <Route path="plans/retail" element={<IndividualPlan />} />
+                <Route
+                  path="plans/retail/full-plan-details"
+                  element={<FullPlanDetails />}
+                />
+                <Route path="plans/student" element={<StudentPlan />} />
+                <Route path="plans/corporate" element={<CorporatePlan />} />
+
+                <Route path="purchase-plan" element={<PurchasePlan />} />
+              </Routes>
+            </ScrollToTop>
+            <Footer />
+          </div>
+        </Router>
+      </FamilyProvider>
     </>
   );
 }

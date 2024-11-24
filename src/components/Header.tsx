@@ -75,7 +75,7 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
                 </button>
                 <div className="absolute z-50 left-0 mt-2 w-48 bg-white border rounded shadow-md opacity-0 group-hover:opacity-100">
                   <Link
-                    to="/providers/list"
+                    to="/providers-list"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     List of Providers
@@ -115,7 +115,7 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
                     Retail Plans
                   </Link>
                   <Link
-                    to="/plans/corporate"
+                    to="/plans/student"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Student Plans

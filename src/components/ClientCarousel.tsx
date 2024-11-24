@@ -55,7 +55,7 @@ const ClientCarousel = () => {
         className="px-4"
       >
         {logos.map((logo, index) => (
-          <SwiperSlide key={index} className="">
+          <SwiperSlide key={index}>
             <img src={logo.src} alt={logo.alt} className="h-12" />
           </SwiperSlide>
         ))}
