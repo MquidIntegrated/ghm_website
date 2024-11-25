@@ -18,6 +18,7 @@ import ProvidersList from "./pages/ProvidersList";
 import PurchasePlan from "./pages/PurchasePlan";
 import ScrollToTop from "./utils/ScrollToTop";
 import {FamilyProvider} from "./contexts/FamilyContext";
+import ConfirmPlanDetails from "./pages/ConfirmPlanDetails";
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
                 <Route path="plans/corporate" element={<CorporatePlan />} />
 
                 <Route path="purchase-plan" element={<PurchasePlan />} />
+                <Route
+                  path="confirm-plan-details"
+                  element={<ConfirmPlanDetails />}
+                />
               </Routes>
             </ScrollToTop>
             <Footer />

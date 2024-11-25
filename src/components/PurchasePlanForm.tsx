@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from "react";
 import nameIcon from "../assets/svg/userContactForm.svg";
+import {useNavigate} from "react-router-dom";
 // import trashIcon from "../assets/svg/trash.svg";
 import rightArrow from "../assets/svg/rigth-arrow.svg";
 import {useFamilyContext, PersonDetails} from "../contexts/FamilyContext";
 
 const FamilyDetailsForm: React.FC = () => {
-  const {familySize, persons, setFamilySize, setPersons} = useFamilyContext();
+  const navigate = useNavigate();
+  const {familySize, persons, setFamilySize, setPersons, setPaymentTotal} =
+    useFamilyContext();
 
   const familyOptions = [
     "Individual",
@@ -108,7 +111,10 @@ const FamilyDetailsForm: React.FC = () => {
 
   const handleContinue = () => {
     if (validateInputs()) {
-      console.log("Submitted Data:", persons);
+      const totalPayment = calculateTotal(); // Calculate total payment
+      setPaymentTotal(totalPayment); // Store the total payment in the context
+      navigate("/confirm-plan-details");
+      console.log("Submitted Data:", {persons, totalPayment});
       // Proceed to the next step
     } else {
       alert("Please fill all the required fields!");
@@ -239,6 +245,12 @@ const FamilyDetailsForm: React.FC = () => {
               </button> */}
               </div>
             </div>
+            {/* Error Message */}
+            {errors[index] && (
+              <p className="text-red-500 text-sm mt-2 text-nowrap">
+                Please fill all fields for this person
+              </p>
+            )}
           </div>
         ))}
       </div>
@@ -250,7 +262,7 @@ const FamilyDetailsForm: React.FC = () => {
         </p>
       </div>
       <div className="flex justify-end space-x-4 mt-4">
-        <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-full">
+        <button className="bg-ghmPurple-100 text-ghmPurple-300 px-8 py-2 rounded-full">
           Back
         </button>
         <button
