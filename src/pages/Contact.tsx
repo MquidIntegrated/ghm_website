@@ -1,4 +1,3 @@
-import React from "react";
 import image from "../assets/png/contactForm.png";
 import nameIcon from "../assets/svg/userContactForm.svg";
 import mailIcon from "../assets/svg/mailContactForm.svg";

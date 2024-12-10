@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
-import axios from "axios";
 import api from "../utils/ApiBaseUrl";
-import {useFamilyContext} from "../contexts/FamilyContext";
 
 const PaymentStatus = () => {
   const [searchParams] = useSearchParams();

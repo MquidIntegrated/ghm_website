@@ -1,4 +1,3 @@
-import React from "react";
 import ngSvg from "../assets/svg/Nigeria (NG).svg";
 
 const IndividualPlansTable = () => {

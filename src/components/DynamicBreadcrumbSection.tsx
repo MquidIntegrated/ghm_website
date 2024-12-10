@@ -1,5 +1,3 @@
-import React from "react";
-
 interface IBreadcrumbProps {
   backgroundImage: string;
   title: string;

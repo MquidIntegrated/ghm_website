@@ -1,4 +1,3 @@
-import React from "react";
 import Clients from "../components/Clients";
 import ValueOffer from "../components/ValueOffer";
 import OurPlans from "../components/OurPlans";

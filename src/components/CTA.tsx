@@ -1,4 +1,3 @@
-import React from "react";
 import bg from "../assets/png/cta-bg.png";
 
 const CTA = () => {

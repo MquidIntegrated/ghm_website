@@ -1,4 +1,3 @@
-import React from "react";
 import ConfirmPlanDetailsForm from "../components/ConfirmPlanDetailsForm";
 
 const ConfirmPlanDetails = () => {

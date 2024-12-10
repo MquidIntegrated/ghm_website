@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {motion, AnimatePresence} from "framer-motion";
 import cross from "../assets/svg/bg-cross.svg";
 import testimonialImg from "../assets/svg/clients/testimonial-img.svg";

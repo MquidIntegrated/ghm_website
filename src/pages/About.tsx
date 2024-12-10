@@ -1,4 +1,3 @@
-import React from "react";
 import DynamicBreadcrumbSection from "../components/DynamicBreadcrumbSection";
 import bg from "../assets/png/aboutBreadcrumbBg.png";
 import WhoWeAre from "../components/WhoWeAre";

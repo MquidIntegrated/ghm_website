@@ -1,5 +1,3 @@
-import React from "react";
-import {Outlet} from "react-router-dom";
 import DynamicBreadcrumbSection from "../components/DynamicBreadcrumbSection";
 import bg from "../assets/png/plansBreadcrumbBg.png";
 import OurPlans from "../components/OurPlans";

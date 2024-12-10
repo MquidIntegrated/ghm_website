@@ -66,10 +66,10 @@ const FamilyDetailsForm: React.FC = () => {
     }
   };
 
-  const deletePerson = (index: number) => {
-    const updatedPersons = persons.filter((_, i) => i !== index);
-    setPersons(updatedPersons);
-  };
+  // const deletePerson = (index: number) => {
+  //   const updatedPersons = persons.filter((_, i) => i !== index);
+  //   setPersons(updatedPersons);
+  // };
 
   useEffect(() => {
     const newSize = parseInt(familySize.split(" ")[2] || "1", 10);

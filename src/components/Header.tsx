@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 import whiteLogo from "../assets/svg/ghm-logo-white.svg";
 import colorLogo from "../assets/svg/ghm-logo-color.svg";
 import FooterMenu from "./FooterMenu";
@@ -13,13 +13,14 @@ import hamburgerWhite from "../assets/svg/hamburgerWhite.svg";
 const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
     };
+    console.log(isScrolled);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);

@@ -1,4 +1,3 @@
-import React from "react";
 import LinkCard from "./LinkCard";
 import retailPlan from "../assets/png/retailPlan.png";
 import studentPlan from "../assets/png/studentPlan.png";

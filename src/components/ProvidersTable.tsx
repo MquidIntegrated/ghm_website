@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import filter from "../assets/svg/filter.svg";
-import {div} from "framer-motion/client";
 
 interface Provider {
   name: string;

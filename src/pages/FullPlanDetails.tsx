@@ -1,4 +1,3 @@
-import React from "react";
 import IndividualPlansTable from "../components/IndividualPlansTable";
 import CTA from "../components/CTA";
 

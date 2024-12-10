@@ -1,4 +1,3 @@
-import React from "react";
 import ngSvg from "../assets/svg/Nigeria (NG).svg";
 import checkCircle from "../assets/svg/check-circle-purple.svg";
 import removeCircle from "../assets/svg/remove-circle.svg";

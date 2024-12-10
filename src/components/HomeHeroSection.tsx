@@ -1,4 +1,3 @@
-import React from "react";
 import heroImg from "../assets/png/homeHero.png";
 
 const HomeHeroSection = () => {

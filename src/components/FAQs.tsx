@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import cross from "../assets/svg/faq-cross.svg";
 
 const faqs = [

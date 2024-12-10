@@ -1,4 +1,3 @@
-import React from "react";
 import triangle from "../assets/svg/triangle.svg";
 import globe from "../assets/svg/global.svg";
 import shuffle from "../assets/svg/group.svg";

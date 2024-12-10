@@ -1,4 +1,3 @@
-import React from "react";
 import logo from "../assets/svg/ghm-footer-logo.svg";
 import cross from "../assets/svg/footer-cross.svg";
 import address from "../assets/svg/address.svg";

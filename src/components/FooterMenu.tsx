@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import arrow from "../assets/svg/dropdown-arrow.svg";
 
 interface MenuItem {
