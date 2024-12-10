@@ -29,7 +29,7 @@ const menuItems: MenuItem[] = [
   {label: "Contact", to: "/contact"},
 ];
 
-const FooterMenu: React.FC<{onNavigate: () => void}> = ({onNavigate}) => {
+const FooterMenu: React.FC<{onNavigate?: () => void}> = ({onNavigate}) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const toggleDropdown = (label: string) => {
