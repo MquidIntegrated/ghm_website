@@ -26,6 +26,10 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header
       className={` ${
@@ -37,7 +41,7 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
       <div className="ghm-container">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <Link to="/">
+          <Link to="/" onClick={closeMenu}>
             <img
               src={isHomePage && !isMobileMenuOpen ? whiteLogo : colorLogo}
               alt=""
@@ -82,7 +86,7 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
                     List of Providers
                   </Link>
                   <Link
-                    to="/providers/map"
+                    to="/providers-join"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Join Provider Network
@@ -174,63 +178,12 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute z-50 h-screen w-full bg-white p-4 border-t shadow-md">
-          {/* <nav className="space-y-4">
-            <Link
-              to="/about"
-              className="block text-gray-700 hover:text-purple-600"
-            >
-              About GH
-            </Link>
-            <div>
-              <button className="block text-gray-700 hover:text-purple-600 w-full text-left">
-                Providers
-              </button>
-              <div className="ml-4 space-y-2">
-                <Link
-                  to="/providers/list"
-                  className="block text-sm text-gray-700 hover:text-purple-600"
-                >
-                  Provider List
-                </Link>
-                <Link
-                  to="/providers/map"
-                  className="block text-sm text-gray-700 hover:text-purple-600"
-                >
-                  Provider Map
-                </Link>
-              </div>
-            </div>
-            <div>
-              <button className="block text-gray-700 hover:text-purple-600 w-full text-left">
-                Health Plans
-              </button>
-              <div className="ml-4 space-y-2">
-                <Link
-                  to="/plans/retail"
-                  className="block text-sm text-gray-700 hover:text-purple-600"
-                >
-                  Retail Plans
-                </Link>
-                <Link
-                  to="/plans/corporate"
-                  className="block text-sm text-gray-700 hover:text-purple-600"
-                >
-                  Corporate Plans
-                </Link>
-              </div>
-            </div>
-            <Link
-              to="/contact"
-              className="block text-gray-700 hover:text-purple-600"
-            >
-              Contact
-            </Link>
-          </nav> */}
-          <FooterMenu />
+          <FooterMenu onNavigate={closeMenu} />
           <div className="mt-6">
             <Link
               to="/quote"
               className="block w-full text-center bg-ghmPurple-300 text-white py-2 rounded-full"
+              onClick={closeMenu}
             >
               Get a Quote
             </Link>
