@@ -17,6 +17,10 @@
   @apply bg-gradient-to-r from-[#A13332] to-[#A9518B] bg-clip-text text-transparent;
 }
 
+.ghm-text-gradient-2 {
+  @apply bg-gradient-to-r from-[#EF4948] to-[#A9518B] bg-clip-text text-transparent;
+}
+
 .ghm-bg-card-gradient {
   @apply bg-gradient-to-b from-ghmPink-700 to-ghmPurple-500;
 }
