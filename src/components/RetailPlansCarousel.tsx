@@ -11,11 +11,13 @@ import rubyIconPoular from "../assets/svg/ruby-popular.svg";
 import rubyIcon from "../assets/svg/ruby.svg";
 import checkWhite from "../assets/svg/check-circle-white.svg";
 import checkPurple from "../assets/svg/check-circle-purple.svg";
+import {Link} from "react-router-dom";
 
 type Plan = {
   icon: string;
   title: string;
   price: string;
+  link: string;
   features: string[];
   isPopular?: boolean;
 };
@@ -25,6 +27,7 @@ const plans: Plan[] = [
     icon: goldIcon,
     title: "Gold",
     price: "₦75,600",
+    link: "/purchase-plan",
     features: [
       "Roam across 700+ Hospitals",
       "In-patient care with feeding-General ward",
@@ -41,6 +44,7 @@ const plans: Plan[] = [
     icon: pearlIcon,
     title: "Pearl",
     price: "₦125,600",
+    link: "/purchase-plan",
     features: [
       "Roam across 800+ Hospitals",
       "In-patient care with feeding- Semi-private ward",
@@ -57,6 +61,7 @@ const plans: Plan[] = [
     icon: rubyIconPoular,
     title: "Ruby",
     price: "₦205,600",
+    link: "/purchase-plan",
     features: [
       "Roam across 1000+ Hospitals",
       "In-patient care with feeding- Private ward",
@@ -74,6 +79,7 @@ const plans: Plan[] = [
     icon: rubyIcon,
     title: "Ruby Plus",
     price: "₦457,600",
+    link: "/purchase-plan",
     features: [
       "Roam across 1000+ Hospitals",
       "In-patient care with feeding- Private ward",
@@ -172,15 +178,18 @@ const RetailPlansCarousel: React.FC = () => {
                   /year
                 </span>
               </p>
-              <button
-                className={`mt-6 w-full bg-white py-2 ${
+
+              <Link
+                to={plan.link}
+                className={`mt-6 w-full bg-white py-2 inline-block text-center ${
                   plan.isPopular
                     ? "text-ghmPink-600"
                     : "text-ghmPurple-500 border-ghmPurple-500"
                 }  rounded-full border `}
               >
                 Select Plan
-              </button>
+              </Link>
+
               <ul
                 className={`mt-8 space-y-2 text-base border-t py-8 ${
                   plan.isPopular ? "border-white" : "border-ghmPurple-200"

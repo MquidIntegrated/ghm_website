@@ -19,11 +19,14 @@ const Checkout = () => {
     phoneNumber,
     address,
   } = useFamilyContext();
+  const websiteUrl = import.meta.env.VITE_WEBSITE_BASE_URL;
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // console.log(`${websiteUrl}/payment-status`);
+
     if (
       !persons.length ||
       paymentTotal === 0 ||
@@ -50,16 +53,30 @@ const Checkout = () => {
     setError(null);
 
     try {
+      // Save payment data to localStorage
+      localStorage.setItem(
+        "paymentDetails",
+        JSON.stringify({
+          familySize,
+          persons,
+          paymentTotal,
+          fullName,
+          email,
+          phoneNumber,
+          address,
+        })
+      );
+
       const response = await api.post("/payment/payment-link", {
         familySize,
         persons,
-        paymentTotal: "30",
+        paymentTotal,
         fullName,
         email,
         phoneNumber,
         address,
         currency: "NGN",
-        redirect_url: "http://localhost:5173/payment-status",
+        redirect_url: `${websiteUrl}/payment-status`,
       });
 
       // console.log(response);

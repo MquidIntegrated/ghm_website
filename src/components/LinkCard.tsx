@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 interface LinkCardProps {
   imageSrc: string;
   title: string;
@@ -25,14 +27,14 @@ const LinkCard = ({imageSrc, title, buttonText, buttonLink}: LinkCardProps) => {
           {title}
         </h2>
 
-        <a href={buttonLink} className="inline-block">
+        <Link to={buttonLink} className="inline-block">
           <button className="inline-flex items-center space-x-2 bg-white hover:bg-gray-400 text-ghmGrey-800 py-1.5 px-3 md:py-2 md:px-4 rounded-full transition-all duration-200 group text-sm md:text-base">
             <span>{buttonText}</span>
             <span className="transform group-hover:translate-x-1 transition-transform duration-200">
               →
             </span>
           </button>
-        </a>
+        </Link>
       </div>
     </div>
   );

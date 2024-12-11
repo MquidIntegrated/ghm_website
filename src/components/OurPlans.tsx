@@ -8,19 +8,19 @@ const linkCardProps = [
     imageSrc: retailPlan,
     title: "Retail Plans",
     buttonText: "View Plans",
-    buttonLink: "#",
+    buttonLink: "/plans/retail",
   },
   {
     imageSrc: studentPlan,
     title: "Student Plans",
     buttonText: "Learn More",
-    buttonLink: "#",
+    buttonLink: "/plans/student",
   },
   {
     imageSrc: corporatePlan,
     title: "Corporate Plans",
     buttonText: "Learn More",
-    buttonLink: "#",
+    buttonLink: "/plans/corporate",
   },
 ];
 

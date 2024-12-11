@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import bg from "../assets/png/cta-bg.png";
 
 const CTA = () => {
@@ -13,9 +14,12 @@ const CTA = () => {
             pricing and access to quality care for you, your family, or your
             team.
           </p>
-          <button className="bg-white mb-6 lg:mb-8 text-ghmGrey-800 rounded-full px-4 py-2 md:px-6 md:py-3">
+          <Link
+            to="/"
+            className="bg-white mb-4 text-ghmGrey-800 inline-block rounded-full px-4 py-2 md:px-6 md:py-3"
+          >
             Explore Plans &rarr;
-          </button>
+          </Link>
           <span className="block text-[#85BDAA]">*for individuals</span>
         </div>
       </div>
