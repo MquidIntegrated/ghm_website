@@ -86,7 +86,7 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
                     List of Providers
                   </Link>
                   <Link
-                    to="/providers-join"
+                    to="/join-provider-network"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Join Provider Network

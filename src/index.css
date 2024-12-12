@@ -28,3 +28,11 @@
 .ghm-table-row {
   @apply p-4 border-b;
 }
+
+.ghm-404-text-gradient {
+  @apply bg-gradient-to-r from-[#A13332] to-[#432037] bg-clip-text text-transparent;
+}
+
+.ghm-404-bg-gradient {
+  @apply bg-gradient-to-bl from-white via-pink-100 to-white;
+}

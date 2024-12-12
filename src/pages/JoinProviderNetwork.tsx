@@ -1,16 +1,18 @@
 import {useState} from "react";
-import image from "../assets/png/studentPlanImg.png";
+import image from "../assets/png/providerNetworkForm.png";
 import api from "../utils/ApiBaseUrl";
 
-const StudentPlan = () => {
+const JoinProviderNetwork = () => {
   const [isFormSuccess, setIsFormSuccess] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [formStatus, setFormStatus] = useState<boolean>();
   const [formData, setFormData] = useState({
-    schoolName: "",
-    schoolEmail: "",
+    hospitalName: "",
+    officialEmail: "",
     officialPhoneNumber: "",
-    schoolAddress: "",
+    medicalDirectorName: "",
+    medicalDirectorPhoneNumber: "",
+    hospitalAddress: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,33 +25,28 @@ const StudentPlan = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // console.log(formData);
 
     try {
       setIsLoading(true);
-      const response = await api.post("/form/student-plan", formData);
+      const response = await api.post("/form/provider-form", formData);
 
-      if (response.data.success) {
-        setIsFormSuccess("Form submitted successfully");
-        setFormStatus(true);
-
-        // alert("Form submitted successfully!");
-      } else {
-        setIsFormSuccess("Form failed to submit. Please try again");
-        setFormStatus(false);
-      }
-      console.log("Response:", response.data);
+      response.data.success
+        ? (setIsFormSuccess("Form submitted successfully"), setFormStatus(true))
+        : (setIsFormSuccess("Form failed to submit. Please try again"),
+          setFormStatus(false));
     } catch (error) {
       console.error("Error during form submission:", error);
       setIsFormSuccess("Failed to submit the form.");
       setFormStatus(false);
-
-      // alert("Failed to submit the form.");
     } finally {
       setFormData({
-        schoolName: "",
-        schoolEmail: "",
+        hospitalName: "",
+        officialEmail: "",
         officialPhoneNumber: "",
-        schoolAddress: "",
+        medicalDirectorName: "",
+        medicalDirectorPhoneNumber: "",
+        hospitalAddress: "",
       }); // Reset form fields
       setIsLoading(false);
       setTimeout(() => {
@@ -61,7 +58,7 @@ const StudentPlan = () => {
 
   return (
     <div className="ghm-container py-10 md:py-20">
-      <div className="flex flex-col-reverse  lg:flex-row gap-y-10 lg:gap-y-0 lg:space-x-16 xl:space-x-28">
+      <div className="flex flex-col-reverse lg:flex-row gap-y-10 lg:gap-y-0 lg:space-x-16 xl:space-x-28">
         {/* image */}
         <div>
           <img src={image} alt="" />
@@ -70,75 +67,112 @@ const StudentPlan = () => {
         <div className="flex-1">
           {" "}
           <h2 className="text-ghmBlack font-semibold text-3xl md:text-4xl max-w-xl mb-4">
-            Get your Student Plan
+            Join Our Network
           </h2>
-          <p className="text-ghmGrey-700 mb-5 md:mb-10">
-            Fill out the form below and our team will reach out to provide a
-            customized quote
+          <p className="text-ghmGrey-700 mb-5 md:mb-5">
+            Reach out to us and we will respond as soon as possible.
           </p>
           <form className="space-y-4 md:w-10/12" onSubmit={handleSubmit}>
-            {/* name of school field */}
+            {/* name of hospital field */}
             <div className="flex flex-col space-y-2">
-              <label htmlFor="schoolName" className="text-ghmGrey-500">
-                Name of School
+              <label htmlFor="hospitalName" className="text-ghmGrey-500">
+                Name of Hospital
               </label>
               <input
                 required
                 type="text"
-                placeholder="School Name"
-                id="schoolName"
-                value={formData.schoolName}
+                placeholder="Hospital Name"
+                id="hospitalName"
+                value={formData.hospitalName}
                 onChange={handleChange}
                 className="border px-6 py-4 rounded-full border-ghmPurple-200"
               />
             </div>
-            {/* school email field */}
+            {/* official email field */}
             <div className="flex flex-col space-y-2">
-              <label htmlFor="schoolEmail" className="text-ghmGrey-500">
+              <label htmlFor="officialEmail" className="text-ghmGrey-500">
                 Official Email
               </label>
               <input
                 required
                 type="text"
-                placeholder="School Official Email"
-                id="schoolEmail"
-                value={formData.schoolEmail}
+                placeholder="Official Email"
+                id="officialEmail"
+                value={formData.officialEmail}
                 onChange={handleChange}
                 className="border px-6 py-4 rounded-full border-ghmPurple-200"
               />
             </div>
             {/* Official Phone Number field */}
             <div className="flex flex-col space-y-2">
-              <label htmlFor="schoolName" className="text-ghmGrey-500">
+              <label htmlFor="officialPhoneNumber" className="text-ghmGrey-500">
                 Official Phone Number
               </label>
               <input
                 required
                 type="number"
-                placeholder="080 393 29333"
+                placeholder="080 000 0000"
                 id="officialPhoneNumber"
                 value={formData.officialPhoneNumber}
                 onChange={handleChange}
                 className="border px-6 py-4 rounded-full border-ghmPurple-200"
               />
             </div>
-            {/* school address field */}
+            {/* name and phone number of medical doctor */}
+            <div className="flex flex-col lg:flex-row justify-between space-y-4 lg:space-y-0 lg:space-x-6">
+              {/* medical doctor name field */}
+              <div className="flex flex-col space-y-2 w-full">
+                <label
+                  htmlFor="medicalDirectorName"
+                  className="text-ghmGrey-500 text-nowrap"
+                >
+                  Name of Medical Director
+                </label>
+                <input
+                  required
+                  type="text"
+                  placeholder="MD's full name"
+                  id="medicalDirectorName"
+                  value={formData.medicalDirectorName}
+                  onChange={handleChange}
+                  className="border px-6 py-4 rounded-full border-ghmPurple-200"
+                />
+              </div>
+              {/* representatives number field */}
+              <div className="flex flex-col space-y-2 w-full">
+                <label
+                  htmlFor="medicalDirectorPhoneNumber"
+                  className="text-ghmGrey-500"
+                >
+                  Phone Number of Medical Director
+                </label>
+                <input
+                  required
+                  type="number"
+                  placeholder="080 000 0000"
+                  id="medicalDirectorPhoneNumber"
+                  value={formData.medicalDirectorPhoneNumber}
+                  onChange={handleChange}
+                  className="border px-6 py-4 rounded-full border-ghmPurple-200"
+                />
+              </div>
+            </div>
+            {/* office address field */}
             <div className="flex flex-col space-y-2">
-              <label htmlFor="schoolAddress" className="text-ghmGrey-500">
-                School Address
+              <label htmlFor="hospitalAddress" className="text-ghmGrey-500">
+                Hospital Address
               </label>
               <input
                 required
                 type="text"
-                placeholder="Physical address of the school"
-                id="schoolAddress"
-                value={formData.schoolAddress}
+                placeholder="Physical address of the hospital"
+                id="hospitalAddress"
+                value={formData.hospitalAddress}
                 onChange={handleChange}
                 className="border px-6 py-4 rounded-full border-ghmPurple-200"
               />
             </div>
 
-            {/* Form success/error message */}
             <p
               className={`${
                 formStatus
@@ -167,4 +201,4 @@ const StudentPlan = () => {
   );
 };
 
-export default StudentPlan;
+export default JoinProviderNetwork;

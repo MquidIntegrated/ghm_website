@@ -14,7 +14,7 @@ const menuItems: MenuItem[] = [
     to: "/providers-list",
     dropdown: [
       {label: "List of Providers", to: "/providers-list"},
-      {label: "Join Provider Network", to: "/providers-join"},
+      {label: "Join Provider Network", to: "/join-provider-network"},
     ],
   },
   {

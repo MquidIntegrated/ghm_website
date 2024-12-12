@@ -21,6 +21,8 @@ import {FamilyProvider} from "./contexts/FamilyContext";
 import ConfirmPlanDetails from "./pages/ConfirmPlanDetails";
 import Checkout from "./pages/Checkout";
 import PaymentStatus from "./pages/PaymentStatus";
+import JoinProviderNetwork from "./pages/JoinProviderNetwork";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -35,6 +37,10 @@ function App() {
                 <Route path="about" element={<About />} />
                 <Route path="contact" element={<Contact />} />
                 <Route path="providers-list" element={<ProvidersList />} />
+                <Route
+                  path="join-provider-network"
+                  element={<JoinProviderNetwork />}
+                />
                 <Route path="plans" element={<Plans />} />
                 <Route path="plans/retail" element={<IndividualPlan />} />
                 <Route
@@ -51,6 +57,7 @@ function App() {
                 />
                 <Route path="checkout" element={<Checkout />} />
                 <Route path="payment-status" element={<PaymentStatus />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </ScrollToTop>
             <Footer />

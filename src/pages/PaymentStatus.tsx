@@ -10,30 +10,66 @@ const PaymentStatus = () => {
 
   useEffect(() => {
     const transactionId = searchParams.get("transaction_id");
-    const paymentStatus = searchParams.get("status");
+    const transactionStatus = searchParams.get("status");
 
     // Retrieve payment data
     const storedDetails = localStorage.getItem("paymentDetails");
     if (storedDetails) {
-      setPaymentDetails(JSON.parse(storedDetails));
-      console.log("payment details", paymentDetails);
+      const parsedDetails = JSON.parse(storedDetails);
+      console.log("Parsed payment details:", parsedDetails); // Log parsed data directly
+      setPaymentDetails(parsedDetails);
+    } else {
+      console.log("No payment details found in localStorage.");
     }
 
     if (
-      transactionId &&
-      (paymentStatus === "completed" || paymentStatus === "successful")
+      !transactionId ||
+      (transactionStatus !== "completed" && transactionStatus !== "successful")
     ) {
-      verifyTransaction(transactionId);
-    } else {
       setPaymentStatus("Payment failed or cancelled.");
     }
+
+    // console.log("payment details", storedDetails);
+    // if (
+    //   transactionId &&
+    //   (paymentStatus === "completed" || paymentStatus === "successful")
+    // ) {
+    //   verifyTransaction(transactionId);
+    // } else {
+    //   setPaymentStatus("Payment failed or cancelled.");
+    // }
   }, [searchParams]);
+
+  useEffect(() => {
+    const transactionId = searchParams.get("transaction_id");
+    if (transactionId && paymentDetails) {
+      verifyTransaction(transactionId);
+    }
+  }, [searchParams, paymentDetails]);
+
+  // const verifyTransaction = async (transactionId: string) => {
+  //   try {
+  //     const response = await api.get(
+  //       `/payment/flutter-callback?transaction_id=${transactionId}`
+  //     );
+  //     console.log(response);
+  //     setPaymentStatus("Payment made successfully!");
+  //     setPaymentSuccess(true);
+  //     // alert("Payment successful!");
+  //   } catch (error) {
+  //     console.log(error);
+  //     setPaymentStatus("Payment verification failed. Please contact support.");
+  //     setPaymentSuccess(false);
+  //     // alert("Payment verification failed. Please contact support.");
+  //   }
+  // };
 
   const verifyTransaction = async (transactionId: string) => {
     try {
-      const response = await api.get(
-        `/payment/flutter-callback?transaction_id=${transactionId}`
-      );
+      const response = await api.post(`/payment/flutter-webhook`, {
+        transaction_id: transactionId,
+        ...paymentDetails,
+      });
       console.log(response);
       setPaymentStatus("Payment made successfully!");
       setPaymentSuccess(true);
@@ -51,7 +87,9 @@ const PaymentStatus = () => {
       <div className="text-center">
         <p className="text-ghmPurple-300 mb-4">Payment Status</p>
         <h2 className="text-ghmBlack font-semibold text-3xl md:text-4xl mb-4">
-          {paymentSuccess
+          {paymentSuccess === null
+            ? ""
+            : paymentSuccess
             ? "Thank you for your payment"
             : "Payment failed to complete, please try again"}
         </h2>

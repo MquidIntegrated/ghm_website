@@ -70,7 +70,7 @@ const Checkout = () => {
       const response = await api.post("/payment/payment-link", {
         familySize,
         persons,
-        paymentTotal,
+        paymentTotal: 30,
         fullName,
         email,
         phoneNumber,
