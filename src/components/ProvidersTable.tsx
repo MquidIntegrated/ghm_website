@@ -2,23 +2,25 @@ import React, {useState} from "react";
 import filter from "../assets/svg/filter.svg";
 
 interface Provider {
+  state: string;
+  lga: string;
   name: string;
   address: string;
+  plans: string;
   services: string[];
-  state: string;
-  city: string;
 }
 
 interface ProvidersTableProps {
+  providers: Provider[];
   filters: {
     state: string;
-    city: string;
+    lga: string;
     services: string[];
   };
   setFilters: React.Dispatch<
     React.SetStateAction<{
       state: string;
-      city: string;
+      lga: string;
       services: string[];
     }>
   >;
@@ -26,96 +28,24 @@ interface ProvidersTableProps {
 }
 
 const ProvidersTable: React.FC<ProvidersTableProps> = ({
+  providers,
   filters,
   setFilters,
   onToggleFilterModal,
 }) => {
-  const dummyData: Provider[] = [
-    {
-      name: "Simeone Specialist Hospital",
-      address: "2 /4 Abagana Street, Aba",
-      services: ["Diagnostics Services", "General Surgery"],
-      state: "Abia",
-      city: "Osisioma",
-    },
-    {
-      name: "God's Grace Diagnostics LTD",
-      address: "30 Abiriba St, Umuahia",
-      services: ["Optical", "Diagnostics Services"],
-      state: "Abia",
-      city: "Umuahia North",
-    },
-    {
-      name: "Extravagant Grace Children's Clinic",
-      address: "13 Kaduna Street, Umuahia",
-      services: ["Optical", "Diagnostics Services"],
-      state: "Abia",
-      city: "Aba North",
-    },
-    {
-      name: "Lagos Central Hospital",
-      address: "10 Marina Road, Lagos",
-      services: ["General Surgery", "Cardiology"],
-      state: "Lagos",
-      city: "Ikeja",
-    },
-    {
-      name: "Victoria Medical Center",
-      address: "25 Ajose Street, Victoria Island",
-      services: ["Diagnostics Services", "Optical"],
-      state: "Lagos",
-      city: "Victoria Island",
-    },
-    {
-      name: "Simeone Specialist Hospital",
-      address: "2 /4 Abagana Street, Aba",
-      services: ["Diagnostics Services", "General Surgery"],
-      state: "Abia",
-      city: "Osisioma",
-    },
-    {
-      name: "God's Grace Diagnostics LTD",
-      address: "30 Abiriba St, Umuahia",
-      services: ["Optical", "Diagnostics Services"],
-      state: "Abia",
-      city: "Umuahia North",
-    },
-    {
-      name: "Extravagant Grace Children's Clinic",
-      address: "13 Kaduna Street, Umuahia",
-      services: ["Optical", "Diagnostics Services"],
-      state: "Abia",
-      city: "Aba North",
-    },
-    {
-      name: "Lagos Central Hospital",
-      address: "10 Marina Road, Lagos",
-      services: ["General Surgery", "Cardiology"],
-      state: "Lagos",
-      city: "Ikeja",
-    },
-    {
-      name: "Victoria Medical Center",
-      address: "25 Ajose Street, Victoria Island",
-      services: ["Diagnostics Services", "Optical"],
-      state: "Lagos",
-      city: "Victoria Island",
-    },
-  ];
-
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5;
 
-  // Extract unique states and cities based on dummy data
-  const states = Array.from(new Set(dummyData.map(provider => provider.state)));
+  // Extract unique states and lgas based on dummy data
+  const states = Array.from(new Set(providers.map(provider => provider.state)));
 
-  const citiesByState: Record<string, string[]> = dummyData.reduce(
+  const lgaByState: Record<string, string[]> = providers.reduce(
     (acc, provider) => {
       if (!acc[provider.state]) {
         acc[provider.state] = [];
       }
-      if (!acc[provider.state].includes(provider.city)) {
-        acc[provider.state].push(provider.city);
+      if (!acc[provider.state].includes(provider.lga)) {
+        acc[provider.state].push(provider.lga);
       }
       return acc;
     },
@@ -123,12 +53,16 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
   );
 
   // Filter data based on selected filters
-  const filteredData = dummyData.filter(provider => {
+  const filteredData = providers.filter(provider => {
     return (
       (!filters.state || provider.state === filters.state) &&
-      (!filters.city || provider.city === filters.city) &&
+      (!filters.lga || provider.lga === filters.lga) &&
       (filters.services.length === 0 ||
-        filters.services.some(service => provider.services.includes(service)))
+        filters.services.some(service =>
+          provider.services.some(provService =>
+            provService.toLowerCase().includes(service.toLowerCase())
+          )
+        ))
     );
   });
 
@@ -141,12 +75,12 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
     setCurrentPage(page);
   };
 
-  // Reset city dropdown when state changes
+  // Reset lga dropdown when state changes
   const handleStateChange = (state: string) => {
     setFilters(prev => ({
       ...prev,
       state,
-      city: "", // Reset city when state changes
+      lga: "", // Reset lga when state changes
     }));
   };
 
@@ -173,24 +107,22 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
           </select>
         </div>
 
-        {/* City Dropdown */}
+        {/* lga Dropdown */}
         <div className="flex flex-col gap-y-1 ">
-          <label htmlFor="select city" className="text-ghmGrey-500 text-sm">
-            City
+          <label htmlFor="select lga" className="text-ghmGrey-500 text-sm">
+            LGA
           </label>
           <select
             className="border border-ghmPurple-200 rounded-full py-2 pl-2 pr-72"
-            value={filters.city}
-            onChange={e =>
-              setFilters(prev => ({...prev, city: e.target.value}))
-            }
+            value={filters.lga}
+            onChange={e => setFilters(prev => ({...prev, lga: e.target.value}))}
             disabled={!filters.state} // Disable if no state is selected
           >
-            <option value="">Select City</option>
+            <option value="">Select Lga</option>
             {filters.state &&
-              citiesByState[filters.state].map(city => (
-                <option key={city} value={city}>
-                  {city}
+              lgaByState[filters.state].map(lga => (
+                <option key={lga} value={lga}>
+                  {lga}
                 </option>
               ))}
           </select>
@@ -214,9 +146,10 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
             <tr>
               <th className=" px-4 py-2">Provider Name</th>
               <th className=" px-4 py-2">Address</th>
+              <th className="px-4 py-2">Plans</th>
               <th className=" px-4 py-2">Services</th>
               <th className=" px-4 py-2">State</th>
-              <th className=" px-4 py-2">City</th>
+              <th className=" px-4 py-2">LGA</th>
             </tr>
           </thead>
           <tbody>
@@ -229,8 +162,14 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
                   {provider.address}
                 </td>
                 <td className="border-b border-gray-200 px-4 py-4">
-                  {provider.services.map(service => (
-                    <div className="bg-ghmPurple-100 text-ghmPurple-300 w-fit px-4 py-2 rounded-full m-1">
+                  {provider.plans}
+                </td>
+                <td className="border-b border-gray-200 px-4 py-4">
+                  {provider.services.map((service, serviceIndex) => (
+                    <div
+                      key={serviceIndex}
+                      className="bg-ghmPurple-100 text-ghmPurple-300 w-fit px-4 py-2 rounded-full m-1"
+                    >
                       {service}
                     </div>
                   ))}
@@ -239,14 +178,14 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
                   {provider.state}
                 </td>
                 <td className="border-b border-gray-200 px-4 py-4">
-                  {provider.city}
+                  {provider.lga}
                 </td>
               </tr>
             ))}
             {paginatedData.length === 0 && (
               <tr>
                 <td colSpan={5} className="text-center py-4">
-                  No Providers Found
+                  Loading...
                 </td>
               </tr>
             )}
@@ -257,7 +196,7 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
         <button
-          className={`border border-ghmPurple-200 rounded-full px-4 py-2 ${
+          className={`border border-ghmPurple-200 rounded-full font-semibold px-4 py-2 ${
             currentPage === 1 ? "text-gray-400" : "text-ghmPurple-300"
           }`}
           disabled={currentPage === 1}
@@ -269,7 +208,7 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
           Page {currentPage} of {Math.ceil(filteredData.length / rowsPerPage)}
         </div>
         <button
-          className={`border border-ghmPurple-200 rounded-full px-4 py-2 ${
+          className={`border border-ghmPurple-200 rounded-full font-semibold px-4 py-2 ${
             currentPage === Math.ceil(filteredData.length / rowsPerPage)
               ? "text-gray-400"
               : "text-ghmPurple-300"

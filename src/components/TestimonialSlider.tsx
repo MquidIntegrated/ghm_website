@@ -2,6 +2,7 @@ import {useState} from "react";
 import {motion, AnimatePresence} from "framer-motion";
 import cross from "../assets/svg/bg-cross.svg";
 import testimonialImg from "../assets/svg/clients/testimonial-img.svg";
+import {Link} from "react-router-dom";
 
 const testimonials = [
   {
@@ -103,9 +104,12 @@ const TestimonialSlider = () => {
         ))}
       </div>
 
-      <button className="mt-10 ghm-bg-button-gradient px-4 py-2 md:px-6 md:py-3">
+      <Link
+        to="/plans"
+        className="mt-10 ghm-bg-button-gradient px-4 py-2 md:px-6 md:py-3"
+      >
         Explore Plans &rarr;
-      </button>
+      </Link>
     </div>
   );
 };

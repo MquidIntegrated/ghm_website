@@ -15,7 +15,7 @@ const CTA = () => {
             team.
           </p>
           <Link
-            to="/"
+            to="/plans"
             className="bg-white mb-4 text-ghmGrey-800 inline-block rounded-full px-4 py-2 md:px-6 md:py-3"
           >
             Explore Plans &rarr;

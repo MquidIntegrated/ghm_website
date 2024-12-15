@@ -1,5 +1,6 @@
 import {useState} from "react";
 import cross from "../assets/svg/faq-cross.svg";
+import {Link} from "react-router-dom";
 
 const faqs = [
   {
@@ -55,9 +56,12 @@ const FAQs = () => {
             here, please reach out to us, and we&apos;ll be happy to assist you!
           </p>
           <div>
-            <button className="ghm-bg-button-gradient text-sm md:text-base px-4 py-2 md:px-6 md:py-3">
+            <Link
+              to="/contact"
+              className="ghm-bg-button-gradient text-sm md:text-base px-4 py-2 md:px-6 md:py-3"
+            >
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
 

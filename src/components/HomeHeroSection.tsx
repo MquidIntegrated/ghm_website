@@ -19,13 +19,13 @@ const HomeHeroSection = () => {
           </p>
           <div className="flex flex-col md:flex-row space-x-0 md:space-x-4 space-y-4 md:space-y-0">
             <a
-              href="/retail-plans"
+              href="/plans/retail"
               className="bg-ghmPurple-300 text-white text-center px-6 py-3 rounded-full hover:bg-ghmPurple-700"
             >
               View Retail Plans
             </a>
             <a
-              href="/learn-more"
+              href="/plans"
               className="text-white border text-center px-6 py-3 rounded-full"
             >
               Learn More

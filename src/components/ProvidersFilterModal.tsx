@@ -1,17 +1,19 @@
 import React, {useState, useMemo} from "react";
 
 interface Provider {
+  state: string;
+  lga: string;
   name: string;
   address: string;
+  plans: string;
   services: string[];
-  state: string;
-  city: string;
 }
 
 interface ProvidersFilterModalProps {
+  providers: Provider[];
   currentFilters: {
     state: string;
-    city: string;
+    lga: string;
     services: string[];
   };
   onClose: () => void;
@@ -19,66 +21,32 @@ interface ProvidersFilterModalProps {
 }
 
 const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
+  providers,
   currentFilters,
   onClose,
   onApply,
 }) => {
-  const dummyData: Provider[] = [
-    {
-      name: "Simeone Specialist Hospital",
-      address: "2 /4 Abagana Street, Aba",
-      services: ["Diagnostics Services", "General Surgery"],
-      state: "Abia",
-      city: "Osisioma",
-    },
-    {
-      name: "God's Grace Diagnostics LTD",
-      address: "30 Abiriba St, Umuahia",
-      services: ["Optical", "Diagnostics Services"],
-      state: "Abia",
-      city: "Umuahia North",
-    },
-    {
-      name: "Extravagant Grace Children's Clinic",
-      address: "13 Kaduna Street, Umuahia",
-      services: ["Optical", "Diagnostics Services"],
-      state: "Abia",
-      city: "Aba North",
-    },
-    {
-      name: "Lagos Central Hospital",
-      address: "10 Marina Road, Lagos",
-      services: ["General Surgery", "Cardiology"],
-      state: "Lagos",
-      city: "Ikeja",
-    },
-    {
-      name: "Victoria Medical Center",
-      address: "25 Ajose Street, Victoria Island",
-      services: ["Diagnostics Services", "Optical"],
-      state: "Lagos",
-      city: "Victoria Island",
-    },
-  ];
-
   // Extract unique states
-  const states = Array.from(new Set(dummyData.map(provider => provider.state)));
+  const states = useMemo(
+    () => Array.from(new Set(providers.map(provider => provider.state))),
+    [providers]
+  );
 
   // Group cities and services by state
-  const citiesByState: Record<string, string[]> = useMemo(() => {
-    return dummyData.reduce((acc, provider) => {
+  const lgasByState: Record<string, string[]> = useMemo(() => {
+    return providers.reduce((acc, provider) => {
       if (!acc[provider.state]) {
         acc[provider.state] = [];
       }
-      if (!acc[provider.state].includes(provider.city)) {
-        acc[provider.state].push(provider.city);
+      if (!acc[provider.state].includes(provider.lga)) {
+        acc[provider.state].push(provider.lga);
       }
       return acc;
     }, {} as Record<string, string[]>);
-  }, [dummyData]);
+  }, [providers]);
 
   const servicesByState: Record<string, string[]> = useMemo(() => {
-    return dummyData.reduce((acc, provider) => {
+    return providers.reduce((acc, provider) => {
       if (!acc[provider.state]) {
         acc[provider.state] = [];
       }
@@ -89,10 +57,11 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
       });
       return acc;
     }, {} as Record<string, string[]>);
-  }, [dummyData]);
+  }, [providers]);
 
-  const allServices = Array.from(
-    new Set(dummyData.flatMap(provider => provider.services))
+  const allServices = useMemo(
+    () => Array.from(new Set(providers.flatMap(provider => provider.services))),
+    [providers]
   );
 
   const [filters, setFilters] = useState(currentFilters);
@@ -110,12 +79,12 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
     setFilters(prev => ({
       ...prev,
       state,
-      city: "", // Reset city when state changes
+      lga: "", // Reset lga when state changes
       services: [], // Reset services when state changes
     }));
   };
 
-  const availableCities = filters.state ? citiesByState[filters.state] : [];
+  const availableCities = filters.state ? lgasByState[filters.state] : [];
   const availableServices = filters.state
     ? servicesByState[filters.state]
     : allServices;
@@ -123,7 +92,7 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
   const handleReset = () => {
     setFilters({
       state: "",
-      city: "",
+      lga: "",
       services: [],
     });
   };
@@ -141,7 +110,7 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
 
         <h2 className="text-xl font-semibold mb-4">Providers Filter</h2>
 
-        {/* State and City Filters */}
+        {/* State and lga Filters */}
         <div className="flex gap-4 mb-4 text-ghmPurple-400">
           {/* select state */}
           <div className="w-full flex flex-col gap-y-1 ">
@@ -161,21 +130,21 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
               ))}
             </select>
           </div>
-          {/* select city  */}
+          {/* select LGA  */}
           <div className="w-full flex flex-col gap-y-1 ">
-            <label htmlFor="select city" className="text-ghmGrey-500 ">
-              City
+            <label htmlFor="select lga" className="text-ghmGrey-500 ">
+              LGA
             </label>
             <select
               className="border border-ghmPurple-200 rounded-full p-2 w-full"
-              value={filters.city}
-              onChange={e => setFilters({...filters, city: e.target.value})}
+              value={filters.lga}
+              onChange={e => setFilters({...filters, lga: e.target.value})}
               disabled={!filters.state} // Disable if no state is selected
             >
-              <option value="">Select City</option>
-              {availableCities.map(city => (
-                <option key={city} value={city}>
-                  {city}
+              <option value="">Select LGA</option>
+              {availableCities.map(lga => (
+                <option key={lga} value={lga}>
+                  {lga}
                 </option>
               ))}
             </select>
