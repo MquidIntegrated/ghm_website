@@ -4,81 +4,33 @@ import api from "../utils/ApiBaseUrl";
 
 const PaymentStatus = () => {
   const [searchParams] = useSearchParams();
-  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+  // const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
   const [paymentDetails, setPaymentDetails] = useState<any>(null);
-  const [paymentSuccess, setPaymentSuccess] = useState<boolean | null>(null);
+  // const [paymentSuccess, setPaymentSuccess] = useState<boolean | null>(null);
 
   useEffect(() => {
     const transactionId = searchParams.get("transaction_id");
-    const transactionStatus = searchParams.get("status");
-
-    // Retrieve payment data
-    const storedDetails = localStorage.getItem("paymentDetails");
-    if (storedDetails) {
-      const parsedDetails = JSON.parse(storedDetails);
-      console.log("Parsed payment details:", parsedDetails); // Log parsed data directly
-      setPaymentDetails(parsedDetails);
-    } else {
-      console.log("No payment details found in localStorage.");
+    // const transactionStatus = searchParams.get("status");
+    console.log("transaction id to be passed", transactionId);
+    if (transactionId) {
+      // console.log("transaction id to be passed", transactionId);
+      const timer = setTimeout(() => {
+        getTransactionData(transactionId);
+      }, 5000); // Wait for 5 seconds before attempting to fetch
+      return () => clearTimeout(timer); // Cleanup timeout
     }
-
-    if (
-      !transactionId ||
-      (transactionStatus !== "completed" && transactionStatus !== "successful")
-    ) {
-      setPaymentStatus("Payment failed or cancelled.");
-    }
-
-    // console.log("payment details", storedDetails);
-    // if (
-    //   transactionId &&
-    //   (paymentStatus === "completed" || paymentStatus === "successful")
-    // ) {
-    //   verifyTransaction(transactionId);
-    // } else {
-    //   setPaymentStatus("Payment failed or cancelled.");
-    // }
   }, [searchParams]);
 
-  useEffect(() => {
-    const transactionId = searchParams.get("transaction_id");
-    if (transactionId && paymentDetails) {
-      verifyTransaction(transactionId);
-    }
-  }, [searchParams, paymentDetails]);
-
-  // const verifyTransaction = async (transactionId: string) => {
-  //   try {
-  //     const response = await api.get(
-  //       `/payment/flutter-callback?transaction_id=${transactionId}`
-  //     );
-  //     console.log(response);
-  //     setPaymentStatus("Payment made successfully!");
-  //     setPaymentSuccess(true);
-  //     // alert("Payment successful!");
-  //   } catch (error) {
-  //     console.log(error);
-  //     setPaymentStatus("Payment verification failed. Please contact support.");
-  //     setPaymentSuccess(false);
-  //     // alert("Payment verification failed. Please contact support.");
-  //   }
-  // };
-
-  const verifyTransaction = async (transactionId: string) => {
+  const getTransactionData = async (transactionId: string) => {
     try {
-      const response = await api.post(`/payment/flutter-webhook`, {
-        transaction_id: transactionId,
-        ...paymentDetails,
-      });
-      console.log(response);
-      setPaymentStatus("Payment made successfully!");
-      setPaymentSuccess(true);
-      // alert("Payment successful!");
+      const response = await api.get(
+        `/transaction/get-transaction-data?transaction_id=${transactionId}`
+      );
+      console.log(response.data);
+      setPaymentDetails(response.data.data);
     } catch (error) {
-      console.log(error);
-      setPaymentStatus("Payment verification failed. Please contact support.");
-      setPaymentSuccess(false);
-      // alert("Payment verification failed. Please contact support.");
+      console.error(error);
+      // setPaymentStatus("Payment verification failed. Please contact support.");
     }
   };
 
@@ -87,21 +39,17 @@ const PaymentStatus = () => {
       <div className="text-center">
         <p className="text-ghmPurple-300 mb-4">Payment Status</p>
         <h2 className="text-ghmBlack font-semibold text-3xl md:text-4xl mb-4">
-          {paymentSuccess === null
-            ? ""
-            : paymentSuccess
-            ? "Thank you for your payment"
-            : "Payment failed to complete, please try again"}
+          {paymentDetails?.status.toUpperCase()}
         </h2>
       </div>
 
       <div className="bg-white shadow-md max-w-4xl mx-auto p-6 rounded-lg flex flex-col gap-y-6">
-        <div>
+        {/* <div>
           <h1 className="text-lg font-medium text-ghmGrey-700 mb-2">
             Payment Status
           </h1>
           <p>{paymentStatus}</p>
-        </div>
+        </div> */}
 
         {paymentDetails && (
           <div>
@@ -110,7 +58,7 @@ const PaymentStatus = () => {
             </h2>
             <p>
               <span className="font-semibold mr-2">Full Name:</span>
-              {paymentDetails.fullName}
+              {paymentDetails.full_name}
             </p>
             <p>
               <span className="font-semibold mr-2">Email:</span>{" "}
@@ -118,19 +66,19 @@ const PaymentStatus = () => {
             </p>
             <p>
               <span className="font-semibold mr-2">Phone Number:</span>
-              {paymentDetails.phoneNumber}
+              {`+234${paymentDetails.phone_number}`}
             </p>
             <p>
               <span className="font-semibold mr-2">Address:</span>
               {paymentDetails.address}
             </p>
-            <p>
+            {/* <p>
               <span className="font-semibold mr-2">Family Size:</span>
               {paymentDetails.familySize}
-            </p>
+            </p> */}
             <p>
               <span className="font-semibold mr-2">Amount Paid:</span> ₦
-              {paymentDetails.paymentTotal.toLocaleString()}
+              {paymentDetails.amount.toLocaleString()}
             </p>
           </div>
         )}
