@@ -4,34 +4,54 @@ import {Link} from "react-router-dom";
 
 const faqs = [
   {
-    question: "What is health insurance?",
+    question: "How can I purchase a health plan?",
     answer:
-      "Health insurance is a type of coverage that pays for medical expenses incurred by the insured.",
+      "You can purchase a health plan directly through our website. Simply select the plan that best suits your needs, whether individual or family and make payment. Our sales agent will contact you",
   },
   {
-    question: "What is an HMO?",
-    answer:
-      "An HMO (Health Maintenance Organization) provides health services to members through a network of doctors and hospitals.",
+    question: "How can I register my company for the health plan?",
+    answer: (
+      <>
+        You can register your company by submitting your details through this{" "}
+        <Link to="/contact" className="text-ghmPurple-700 underline">
+          link
+        </Link>
+        . A sales agent will get in touch with you.
+      </>
+    ),
   },
   {
-    question: "What is GHML?",
-    answer:
-      "GHML stands for General Health Management Limited, a provider of health insurance services.",
+    question:
+      "How do I add my dependents (e.g., spouse, children) to the plan?",
+    answer: (
+      <>
+        For corporate plans, please contact your HR department or the
+        company&apos;s designated liaison officer to initiate the process of
+        adding dependents to your plan. <br /> For retail plans, please contact
+        our sales team on 09087966270 for further assistance. <br /> In both
+        cases, additional documentation may be required, and any associated fees
+        will be communicated to you.
+      </>
+    ),
   },
   {
-    question: "Who is eligible to register with GHML?",
+    question: "How soon will I receive my policy number after registration?",
     answer:
-      "Anyone seeking health insurance coverage is eligible to register with GHML.",
+      "After successful registration, your policy number is sent to your registered email. If you do not receive it within 24hrs, please contact our call center (09087966270 or 09087966271) for assistance.",
   },
   {
-    question: "Can I change my plan type?",
-    answer:
-      "Yes, you can change your plan type by contacting customer support or through your account settings.",
-  },
-  {
-    question: "Can I access my health records online?",
-    answer:
-      "Yes, you can access your health records online through the GHML portal.",
+    question: "How can I view the benefits of my health plan?",
+    answer: (
+      <>
+        You can view the benefits of your health plan by clicking{" "}
+        <Link
+          to="/plans/retail/full-plan-details"
+          className="text-ghmPurple-700 underline"
+        >
+          health plans.
+        </Link>
+      </>
+    ),
   },
 ];
 
@@ -92,7 +112,7 @@ const FAQs = () => {
                 </span>
               </button>
               {activeIndex === index && (
-                <p className="mt-2 md:mt-3 text-ghmGrey-800 text-xs md:text-sm">
+                <p className="mt-2 md:mt-3 text-ghmGrey-800 text-sm md:text-base">
                   {faq.answer}
                 </p>
               )}

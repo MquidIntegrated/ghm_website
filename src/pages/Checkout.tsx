@@ -23,6 +23,8 @@ const Checkout = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isChecked, setIsChecked] = useState(false); // State to track checkbox
+  const [checkboxError, setCheckboxError] = useState<string | null>(null); // State for checkbox error
 
   useEffect(() => {
     // console.log(`${websiteUrl}/payment-status`);
@@ -49,8 +51,14 @@ const Checkout = () => {
   }, [persons, paymentTotal, fullName, email, phoneNumber, address]);
 
   const handlePayment = async () => {
+    if (!isChecked) {
+      setCheckboxError("Please tick the checkbox to proceed with payment.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
+    setCheckboxError(null);
 
     try {
       // Save payment data to localStorage
@@ -70,7 +78,7 @@ const Checkout = () => {
       const response = await api.post("/payment/payment-link", {
         familySize,
         persons,
-        paymentTotal: 30,
+        paymentTotal: 200000,
         fullName,
         email,
         phoneNumber,
@@ -87,7 +95,7 @@ const Checkout = () => {
 
         window.location.href = response.data.data.data.link;
       } else {
-        console.log(response);
+        // console.log(response);
 
         throw new Error("Unable to generate payment link. Please try again.");
       }
@@ -186,6 +194,9 @@ const Checkout = () => {
         </div>
 
         {error && <p className="text-red-500 text-center">{error}</p>}
+        {checkboxError && (
+          <p className="text-red-500 text-center">{checkboxError}</p>
+        )}
 
         {/* agreement check box */}
         <div className="flex items-center">
@@ -194,6 +205,7 @@ const Checkout = () => {
             type="checkbox"
             value=""
             className="w-4 h-4 bg-white border-ghmPurple-200 "
+            onChange={e => setIsChecked(e.target.checked)} // Update state on change
           />
           <label className="ms-2 text-sm font-medium text-ghmPurple-800">
             I agree to Grooming Health's{" "}
@@ -221,7 +233,7 @@ const Checkout = () => {
           disabled={loading}
           className={`${
             loading
-              ? "bg-ghmPurple-200 text-white"
+              ? "bg-ghmPurple-400 text-white"
               : "bg-ghmPurple-300 text-white"
           } px-4 py-2 rounded-full flex items-center gap-x-2`}
         >

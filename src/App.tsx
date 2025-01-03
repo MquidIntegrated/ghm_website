@@ -23,6 +23,7 @@ import Checkout from "./pages/Checkout";
 import PaymentStatus from "./pages/PaymentStatus";
 import JoinProviderNetwork from "./pages/JoinProviderNetwork";
 import NotFoundPage from "./pages/NotFoundPage";
+import FAQPage from "./pages/FAQPage";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
                 />
                 <Route path="checkout" element={<Checkout />} />
                 <Route path="payment-status" element={<PaymentStatus />} />
+                <Route path="faqs" element={<FAQPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </ScrollToTop>

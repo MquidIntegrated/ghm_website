@@ -34,6 +34,12 @@ const ConfirmPlanDetailsForm = () => {
   };
 
   const handleSubmit = () => {
+    // Check if all fields are filled
+    const {fullName, email, phoneNumber, address} = formData;
+    if (!fullName || !email || !phoneNumber || !address) {
+      alert("Please fill out all fields before proceeding.");
+      return; // Stop further execution
+    }
     // Update the context with form data
     setFullName(formData.fullName);
     setEmail(formData.email);
@@ -53,6 +59,7 @@ const ConfirmPlanDetailsForm = () => {
           <div>
             <label className="block text-sm text-ghmGrey-500">Full Name</label>
             <input
+              required
               type="text"
               name="fullName"
               placeholder="Your Name"
@@ -65,6 +72,7 @@ const ConfirmPlanDetailsForm = () => {
           <div>
             <label className="block text-sm text-ghmGrey-500">Email</label>
             <input
+              required
               type="email"
               name="email"
               placeholder="Your Email"
@@ -83,6 +91,7 @@ const ConfirmPlanDetailsForm = () => {
                 <img src={ngFlag} alt="" /> +234
               </span>
               <input
+                required
                 type="number"
                 name="phoneNumber"
                 placeholder="123 4567 890"
@@ -98,6 +107,7 @@ const ConfirmPlanDetailsForm = () => {
               Street Address
             </label>
             <input
+              required
               type="text"
               name="address"
               placeholder="Your street address"

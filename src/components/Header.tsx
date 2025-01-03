@@ -133,14 +133,48 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
                   </Link>
                 </div>
               </div>
+              {/* support */}
+              <div className="relative group hover:text-ghmPurple-500">
+                <div className="flex items-center">
+                  Support
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+                <div className="absolute z-50 left-0 mt-2 w-32 bg-white border rounded shadow-md opacity-0 group-hover:opacity-100">
+                  <Link
+                    to="/contact"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Contact Us
+                  </Link>
+                  <Link
+                    to="/faqs"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    FAQs
+                  </Link>
+                </div>
+              </div>
               {/* contact */}
-              <Link to="/contact" className="hover:text-ghmPurple-500">
+              {/* <Link to="/contact" className="hover:text-ghmPurple-500">
                 Contact
-              </Link>
+              </Link> */}
             </nav>
 
             {/* get a quote button  */}
-            <button
+            {/* <button
               className={`${
                 isHomePage
                   ? "bg-white hover:bg-ghmPurple-300 hover:text-white "
@@ -148,7 +182,7 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
               } rounded-full hidden md:block px-6 py-3 cursor-pointer transition delay-150 `}
             >
               Get a Quote
-            </button>
+            </button> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -180,13 +214,13 @@ const Header: React.FC<{isHomePage: boolean}> = ({isHomePage}) => {
         <div className="md:hidden absolute z-50 h-screen w-full bg-white p-4 border-t shadow-md">
           <FooterMenu onNavigate={closeMenu} />
           <div className="mt-6">
-            <Link
+            {/* <Link
               to="/quote"
               className="block w-full text-center bg-ghmPurple-300 text-white py-2 rounded-full"
               onClick={closeMenu}
             >
               Get a Quote
-            </Link>
+            </Link> */}
             <div className="mt-4 text-sm text-gray-700">
               {/* our office */}
               <div className="mb-6">

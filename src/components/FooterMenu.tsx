@@ -19,14 +19,22 @@ const menuItems: MenuItem[] = [
   },
   {
     label: "Health Plans",
-    to: "plans",
+    to: "/plans",
     dropdown: [
       {label: "Retail Plans", to: "/plans/retail"},
       {label: "Student Plans", to: "/plans/student"},
       {label: "Corporate Plans", to: "/plans/corporate"},
     ],
   },
-  {label: "Contact", to: "/contact"},
+  {
+    label: "Support",
+    to: "/contact",
+    dropdown: [
+      {label: "Contact", to: "/contact"},
+      {label: "FAQs", to: "/faqs"},
+    ],
+  },
+  // {label: "Contact", to: "/contact"},
 ];
 
 const FooterMenu: React.FC<{onNavigate?: () => void}> = ({onNavigate}) => {
