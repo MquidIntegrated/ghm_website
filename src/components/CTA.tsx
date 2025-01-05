@@ -7,10 +7,10 @@ const CTA = () => {
       <div className="ghm-container text-white py-20">
         <div className="max-w-2xl">
           <h2 className="text-3xl md:text-5xl font-semibold mb-4">
-            Get full health coverage starting from just ₦9,000/m*
+            Get full health coverage starting from just ₦6,300/m*
           </h2>
           <p className="mb-6">
-            Starting at ₦9,000 a month, our health insurance plans offer clear
+            Starting at ₦6,300 a month, our health insurance plans offer clear
             pricing and access to quality care for you, your family, or your
             team.
           </p>

@@ -77,8 +77,8 @@ const PaymentStatus = () => {
               {paymentDetails.familySize}
             </p> */}
             <p>
-              <span className="font-semibold mr-2">Amount Paid:</span> ₦
-              {paymentDetails.amount.toLocaleString()}
+              <span className="font-semibold mr-2">Amount:</span> ₦
+              {paymentDetails.amountPaid.toLocaleString()}
             </p>
           </div>
         )}

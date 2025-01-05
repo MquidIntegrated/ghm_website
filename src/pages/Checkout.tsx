@@ -14,6 +14,7 @@ const Checkout = () => {
     familySize,
     persons,
     paymentTotal,
+    discountedPriceTotal,
     fullName,
     email,
     phoneNumber,
@@ -43,6 +44,7 @@ const Checkout = () => {
       familySize,
       persons,
       paymentTotal,
+      discountedPriceTotal,
       fullName,
       email,
       phoneNumber,
@@ -62,23 +64,24 @@ const Checkout = () => {
 
     try {
       // Save payment data to localStorage
-      localStorage.setItem(
-        "paymentDetails",
-        JSON.stringify({
-          familySize,
-          persons,
-          paymentTotal,
-          fullName,
-          email,
-          phoneNumber,
-          address,
-        })
-      );
+      // localStorage.setItem(
+      //   "paymentDetails",
+      //   JSON.stringify({
+      //     familySize,
+      //     persons,
+      //     paymentTotal,
+      //     fullName,
+      //     email,
+      //     phoneNumber,
+      //     address,
+      //   })
+      // );
 
       const response = await api.post("/payment/payment-link", {
         familySize,
         persons,
-        paymentTotal: 200000,
+        paymentTotal,
+        discountedPriceTotal: 200000,
         fullName,
         email,
         phoneNumber,
@@ -187,10 +190,23 @@ const Checkout = () => {
         {/* payment total */}
         <div className="flex justify-between items-center">
           {" "}
-          <p className="text-lg font-medium text-ghmGrey-700">Payment Total:</p>
-          <p className="text-xl font-bold text-ghmBlack">
-            ₦{paymentTotal.toLocaleString()}
+          <p className="text-lg font-medium text-ghmGrey-700">
+            Amount to be paid:
           </p>
+          <div className="flex gap-x-4">
+            <p
+              className={`text-xl font-bold text-ghmBlack ${
+                discountedPriceTotal !== paymentTotal ? "line-through" : ""
+              }`}
+            >
+              ₦{paymentTotal.toLocaleString()}
+            </p>
+            {discountedPriceTotal !== paymentTotal && (
+              <p className="text-xl font-bold text-ghmBlack">
+                ₦{discountedPriceTotal.toLocaleString()}
+              </p>
+            )}
+          </div>
         </div>
 
         {error && <p className="text-red-500 text-center">{error}</p>}

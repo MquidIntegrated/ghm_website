@@ -7,8 +7,14 @@ import {useFamilyContext, PersonDetails} from "../contexts/FamilyContext";
 
 const FamilyDetailsForm: React.FC = () => {
   const navigate = useNavigate();
-  const {familySize, persons, setFamilySize, setPersons, setPaymentTotal} =
-    useFamilyContext();
+  const {
+    familySize,
+    persons,
+    setFamilySize,
+    setPersons,
+    setPaymentTotal,
+    setDiscountedPriceTotal,
+  } = useFamilyContext();
 
   const familyOptions = [
     "Individual",
@@ -72,6 +78,8 @@ const FamilyDetailsForm: React.FC = () => {
   // };
 
   useEffect(() => {
+    // console.log(discountedPriceTotal);
+
     const newSize = parseInt(familySize.split(" ")[2] || "1", 10);
     const updatedPersons = [...persons];
     while (updatedPersons.length < newSize) {
@@ -89,9 +97,26 @@ const FamilyDetailsForm: React.FC = () => {
     setPersons(updatedPersons);
   }, [familySize]);
 
-  const calculateTotal = () =>
-    persons.reduce((sum, person) => sum + person.price, 0);
+  const calculateTotal = () => {
+    let total = persons.reduce((sum, person) => sum + person.price, 0);
+    let discountPrice = 0;
+    // Apply discount if applicable
+    if (
+      (familySize === "Family of 5" || familySize === "Family of 6") &&
+      persons.every(
+        person => person.plan === persons[0].plan && person.plan !== ""
+      )
+    ) {
+      discountPrice = total * 0.9; // Apply 10% discount
+    } else {
+      discountPrice = total; // No discount
+    }
 
+    return {
+      total,
+      discountPrice,
+    };
+  };
   const validateInputs = () => {
     const newErrors: {[index: number]: boolean} = {};
     persons.forEach((person, index) => {
@@ -111,10 +136,11 @@ const FamilyDetailsForm: React.FC = () => {
 
   const handleContinue = () => {
     if (validateInputs()) {
-      const totalPayment = calculateTotal(); // Calculate total payment
-      setPaymentTotal(totalPayment); // Store the total payment in the context
+      const {total, discountPrice} = calculateTotal(); // Calculate total payment
+      setPaymentTotal(total); // Store the total payment in the context
+      setDiscountedPriceTotal(discountPrice);
       navigate("/confirm-plan-details");
-      console.log("Submitted Data:", {persons, totalPayment});
+      console.log("Submitted Data:", {persons, total});
       // Proceed to the next step
     } else {
       alert("Please fill all the required fields!");
@@ -254,13 +280,24 @@ const FamilyDetailsForm: React.FC = () => {
           </div>
         ))}
       </div>
-
+      {/* payment total  */}
       <div className="mt-4 flex items-center justify-between max-w-4xl">
         <p className="text-lg font-semibold">Payment Total:</p>
         <p className="text-lg font-semibold">
-          ₦ {calculateTotal().toLocaleString()}
+          ₦ {calculateTotal().total.toLocaleString()}
         </p>
       </div>
+      {/* discounted price total */}
+      {calculateTotal().total !== calculateTotal().discountPrice &&
+        calculateTotal().discountPrice > 0 && (
+          <div className="mt-4 flex items-center justify-between max-w-4xl">
+            <p className="text-lg font-semibold">Discounted Price:</p>
+            <p className="text-lg font-semibold">
+              <p> ₦ {calculateTotal().discountPrice.toLocaleString()}</p>
+            </p>
+          </div>
+        )}
+
       <div className="flex justify-end space-x-4 mt-4">
         <button className="bg-ghmPurple-100 text-ghmPurple-300 px-8 py-2 rounded-full">
           Back

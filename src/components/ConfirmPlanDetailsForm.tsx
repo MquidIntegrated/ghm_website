@@ -9,6 +9,7 @@ const ConfirmPlanDetailsForm = () => {
   const {
     persons,
     paymentTotal,
+    discountedPriceTotal,
     setFullName,
     setEmail,
     setPhoneNumber,
@@ -168,6 +169,16 @@ const ConfirmPlanDetailsForm = () => {
           ₦{paymentTotal.toLocaleString()}
         </p>
       </div>
+      {discountedPriceTotal !== paymentTotal && (
+        <div className="mt-6 flex justify-between items-center w-full px-4">
+          <p className="text-lg font-medium text-ghmGrey-700">
+            Discounted Price:
+          </p>
+          <p className="text-xl font-bold text-ghmBlack">
+            ₦{discountedPriceTotal.toLocaleString()}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

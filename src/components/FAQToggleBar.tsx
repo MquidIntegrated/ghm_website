@@ -43,9 +43,9 @@ const FAQToggleBar = ({faqs}: FAQToggleBarProps) => {
             </span>
           </button>
           {activeIndex === index && (
-            <p className="mt-2 md:mt-3 text-ghmGrey-800 text-sm md:text-base">
+            <div className="mt-2 md:mt-3 text-ghmGrey-800 text-sm md:text-base">
               {faq.answer}
-            </p>
+            </div>
           )}
         </div>
       ))}

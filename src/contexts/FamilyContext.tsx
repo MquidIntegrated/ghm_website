@@ -12,6 +12,7 @@ interface FamilyContextType {
   familySize: string;
   persons: PersonDetails[];
   paymentTotal: number;
+  discountedPriceTotal: number;
   fullName: string;
   email: string;
   phoneNumber: string;
@@ -19,6 +20,7 @@ interface FamilyContextType {
   setFamilySize: (size: string) => void;
   setPersons: (persons: PersonDetails[]) => void;
   setPaymentTotal: (total: number) => void;
+  setDiscountedPriceTotal: (discountedPriceTotal: number) => void;
   setFullName: (name: string) => void;
   setEmail: (email: string) => void;
   setPhoneNumber: (phone: string) => void;
@@ -33,6 +35,7 @@ export const FamilyProvider: React.FC<{children: React.ReactNode}> = ({
   const [familySize, setFamilySize] = useState<string>("Individual");
   const [persons, setPersons] = useState<PersonDetails[]>([]);
   const [paymentTotal, setPaymentTotal] = useState<number>(0); // Added paymentTotal
+  const [discountedPriceTotal, setDiscountedPriceTotal] = useState<number>(0);
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -44,6 +47,7 @@ export const FamilyProvider: React.FC<{children: React.ReactNode}> = ({
         familySize,
         persons,
         paymentTotal,
+        discountedPriceTotal,
         fullName,
         email,
         phoneNumber,
@@ -51,6 +55,7 @@ export const FamilyProvider: React.FC<{children: React.ReactNode}> = ({
         setFamilySize,
         setPersons,
         setPaymentTotal,
+        setDiscountedPriceTotal,
         setFullName,
         setEmail,
         setPhoneNumber,
