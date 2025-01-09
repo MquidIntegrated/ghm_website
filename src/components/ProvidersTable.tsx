@@ -16,12 +16,14 @@ interface ProvidersTableProps {
     state: string;
     lga: string;
     services: string[];
+    plans: string[];
   };
   setFilters: React.Dispatch<
     React.SetStateAction<{
       state: string;
       lga: string;
       services: string[];
+      plans: string[];
     }>
   >;
   onToggleFilterModal: () => void;
@@ -62,7 +64,8 @@ const ProvidersTable: React.FC<ProvidersTableProps> = ({
           provider.services.some(provService =>
             provService.toLowerCase().includes(service.toLowerCase())
           )
-        ))
+        )) &&
+      (filters.plans.length === 0 || filters.plans.includes(provider.plans))
     );
   });
 

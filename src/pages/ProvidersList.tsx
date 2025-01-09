@@ -17,6 +17,7 @@ const ProvidersList = () => {
     state: "",
     lga: "",
     services: [] as string[],
+    plans: [] as string[],
   });
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 

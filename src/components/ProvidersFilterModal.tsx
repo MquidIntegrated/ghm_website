@@ -15,6 +15,7 @@ interface ProvidersFilterModalProps {
     state: string;
     lga: string;
     services: string[];
+    plans: string[];
   };
   onClose: () => void;
   onApply: (filters: any) => void;
@@ -59,8 +60,26 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
     }, {} as Record<string, string[]>);
   }, [providers]);
 
+  // Add plans by state grouping
+  const plansByState: Record<string, string[]> = useMemo(() => {
+    return providers.reduce((acc, provider) => {
+      if (!acc[provider.state]) {
+        acc[provider.state] = [];
+      }
+      if (!acc[provider.state].includes(provider.plans)) {
+        acc[provider.state].push(provider.plans);
+      }
+      return acc;
+    }, {} as Record<string, string[]>);
+  }, [providers]);
+
   const allServices = useMemo(
     () => Array.from(new Set(providers.flatMap(provider => provider.services))),
+    [providers]
+  );
+
+  const allPlans = useMemo(
+    () => Array.from(new Set(providers.map(provider => provider.plans))),
     [providers]
   );
 
@@ -75,12 +94,22 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
     });
   };
 
+  const handlePlanToggle = (plan: string) => {
+    setFilters(prevFilters => {
+      const newPlans = prevFilters.plans.includes(plan)
+        ? prevFilters.plans.filter(p => p !== plan)
+        : [...prevFilters.plans, plan];
+      return {...prevFilters, plans: newPlans};
+    });
+  };
+
   const handleStateChange = (state: string) => {
     setFilters(prev => ({
       ...prev,
       state,
       lga: "", // Reset lga when state changes
       services: [], // Reset services when state changes
+      plans: [], // Reset plans when state changes
     }));
   };
 
@@ -88,12 +117,14 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
   const availableServices = filters.state
     ? servicesByState[filters.state]
     : allServices;
+  const availablePlans = filters.state ? plansByState[filters.state] : allPlans;
 
   const handleReset = () => {
     setFilters({
       state: "",
       lga: "",
       services: [],
+      plans: [],
     });
   };
 
@@ -148,6 +179,26 @@ const ProvidersFilterModal: React.FC<ProvidersFilterModalProps> = ({
                 </option>
               ))}
             </select>
+          </div>
+        </div>
+
+        {/* Plans  */}
+        <div className="mb-4">
+          <h3 className="text-ghmGrey-500">Plans</h3>
+          <div className="flex gap-2 flex-wrap">
+            {availablePlans.map(plan => (
+              <button
+                key={plan}
+                className={`px-4 py-2 rounded-full ${
+                  filters.plans.includes(plan)
+                    ? "bg-ghmPurple-300 text-white"
+                    : "bg-ghmPurple-100 text-ghmPurple-300"
+                }`}
+                onClick={() => handlePlanToggle(plan)}
+              >
+                {plan}
+              </button>
+            ))}
           </div>
         </div>
 
