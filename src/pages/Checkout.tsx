@@ -63,24 +63,34 @@ const Checkout = () => {
     setCheckboxError(null);
 
     try {
-      // Save payment data to localStorage
-      // localStorage.setItem(
-      //   "paymentDetails",
-      //   JSON.stringify({
-      //     familySize,
-      //     persons,
-      //     paymentTotal,
-      //     fullName,
-      //     email,
-      //     phoneNumber,
-      //     address,
-      //   })
-      // );
+      // Revalidate prices before creating payment
+      const validation = await api.post("/retail-plan/validate-pricing", {
+        familySize,
+        persons,
+      });
+
+      const validationData = validation.data?.data;
+
+      if (!validationData.isValid) {
+        throw new Error(
+          `Invalid pricing detected: ${validationData.errors?.join("\n")}`
+        );
+      }
+
+      // Verify totals match
+      if (
+        validationData.calculatedTotal !== paymentTotal ||
+        validationData.calculatedDiscountedTotal !== discountedPriceTotal
+      ) {
+        throw new Error(
+          "Price mismatch detected. Please refresh and try again."
+        );
+      }
 
       const response = await api.post("/payment/payment-link", {
         familySize,
-        persons,
-        paymentTotal,
+        persons: validationData.validatedPersons || persons,
+        paymentTotal: validationData.calculatedTotal,
         discountedPriceTotal: 200000,
         fullName,
         email,

@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 // import trashIcon from "../assets/svg/trash.svg";
 import rightArrow from "../assets/svg/rigth-arrow.svg";
 import {useFamilyContext, PersonDetails} from "../contexts/FamilyContext";
+import api from "../utils/ApiBaseUrl";
 
 const FamilyDetailsForm: React.FC = () => {
   const navigate = useNavigate();
@@ -40,16 +41,32 @@ const FamilyDetailsForm: React.FC = () => {
     "Other",
   ];
 
-  const planOptions = ["Gold", "Pearl", "Ruby", "Ruby Plus"];
+  // const planOptions = ["Gold", "Pearl", "Ruby", "Ruby Plus"];
 
-  const planPrices: {[key: string]: number} = {
-    Gold: 1062500,
-    Pearl: 850000,
-    Ruby: 650000,
-    "Ruby Plus": 1200000,
-  };
-
+  // const planPrices: {[key: string]: number} = {
+  //   Gold: 1062500,
+  //   Pearl: 850000,
+  //   Ruby: 650000,
+  //   "Ruby Plus": 1200000,
+  // };
+  const [plans, setPlans] = useState<{name: string; price: number}[]>([]);
   const [errors, setErrors] = useState<{[index: number]: boolean}>({});
+
+  useEffect(() => {
+    // Fetch plans from the backend
+    const fetchPlans = async () => {
+      try {
+        const response = await api.get("/retail-plan/get-all-retail-plans");
+        console.log(response.data.data);
+
+        setPlans(response.data.data);
+      } catch (error) {
+        console.error("Error fetching plans:", error);
+      }
+    };
+
+    fetchPlans();
+  }, []);
 
   const updatePerson = (
     index: number,
@@ -60,7 +77,11 @@ const FamilyDetailsForm: React.FC = () => {
     updatedPersons[index] = {
       ...updatedPersons[index],
       [key]: value,
-      ...(key === "plan" && {price: planPrices[value] || 0}), // Automatically update price
+      ...(key === "plan" && {
+        price: parseFloat(
+          plans.find(plan => plan.name === value)?.price.toString() || "0"
+        ),
+      }), // Automatically update price
     };
     setPersons(updatedPersons);
 
@@ -100,16 +121,16 @@ const FamilyDetailsForm: React.FC = () => {
   const calculateTotal = () => {
     let total = persons.reduce((sum, person) => sum + person.price, 0);
     let discountPrice = 0;
-    // Apply discount if applicable
+
     if (
       (familySize === "Family of 5" || familySize === "Family of 6") &&
       persons.every(
         person => person.plan === persons[0].plan && person.plan !== ""
       )
     ) {
-      discountPrice = total * 0.9; // Apply 10% discount
+      discountPrice = total * 0.9; // 10% discount
     } else {
-      discountPrice = total; // No discount
+      discountPrice = total;
     }
 
     return {
@@ -134,13 +155,41 @@ const FamilyDetailsForm: React.FC = () => {
     return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (validateInputs()) {
-      const {total, discountPrice} = calculateTotal(); // Calculate total payment
-      setPaymentTotal(total); // Store the total payment in the context
-      setDiscountedPriceTotal(discountPrice);
-      navigate("/confirm-plan-details");
-      console.log("Submitted Data:", {persons, total});
+      try {
+        // Validate prices with backend before proceeding
+        const response = await api.post("/retail-plan/validate-pricing", {
+          familySize,
+          persons,
+        });
+
+        const data = response.data.data;
+
+        if (!data.isValid) {
+          alert("Invalid pricing detected. Please refresh and try again.");
+          return;
+        }
+
+        // Update totals with validated amounts
+        setPaymentTotal(data.calculatedTotal);
+        setDiscountedPriceTotal(data.calculatedDiscountedTotal);
+
+        // Update persons with validated prices if needed
+        if (data.validatedPersons) {
+          setPersons(data.validatedPersons);
+        }
+
+        navigate("/confirm-plan-details");
+      } catch (error) {
+        alert("Failed to validate pricing. Please try again.");
+        return;
+      }
+      // const {total, discountPrice} = calculateTotal(); // Calculate total payment
+      // setPaymentTotal(total); // Store the total payment in the context
+      // setDiscountedPriceTotal(discountPrice);
+      // navigate("/confirm-plan-details");
+      // console.log("Submitted Data:", {persons, total});
       // Proceed to the next step
     } else {
       alert("Please fill all the required fields!");
@@ -239,9 +288,9 @@ const FamilyDetailsForm: React.FC = () => {
                 }`}
               >
                 <option value="">Choose a plan</option>
-                {planOptions.map(option => (
-                  <option key={option} value={option}>
-                    {option}
+                {plans.map(plan => (
+                  <option key={plan.name} value={plan.name}>
+                    {plan.name}
                   </option>
                 ))}
               </select>
