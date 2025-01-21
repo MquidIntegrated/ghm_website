@@ -1,5 +1,4 @@
 import PurchasePlanForm from "../components/PurchasePlanForm";
-import {motion} from "framer-motion";
 
 const PurchasePlan = () => {
   return (

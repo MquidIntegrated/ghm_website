@@ -17,7 +17,7 @@ one client at a time"
       />
       <WhoWeAre />
       <MissionVisionValue />
-      <OurTeam />
+      {/* <OurTeam /> */}
       <Clients />
       <CTA />
     </div>

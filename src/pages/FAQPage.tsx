@@ -1,5 +1,3 @@
-import React, {useState} from "react";
-import cross from "../assets/svg/faq-cross.svg";
 import {Link} from "react-router-dom";
 import FAQToggleBar from "../components/FAQToggleBar";
 
