@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useFamilyContext} from "../contexts/FamilyContext";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import rightArrow from "../assets/svg/rigth-arrow.svg";
 import goldMini from "../assets/svg/noun-gold.svg";
 import pearlMini from "../assets/svg/noun-pearl.svg";
@@ -235,13 +235,21 @@ const Checkout = () => {
           />
           <label className="ms-2 text-sm font-medium text-ghmPurple-800">
             I agree to Grooming Health's{" "}
-            <a href="" className="underline hover:no-underline">
+            <Link
+              target="_blank"
+              to="/terms-and-condition"
+              className="underline hover:no-underline"
+            >
               Terms and Conditions
-            </a>{" "}
+            </Link>{" "}
             and confirm I have reviewed the{" "}
-            <a href=" " className="underline hover:no-underline">
+            <Link
+              target="_blank"
+              to="/plans/retail"
+              className="underline hover:no-underline"
+            >
               Full Plan Details
-            </a>{" "}
+            </Link>{" "}
             list
           </label>
         </div>

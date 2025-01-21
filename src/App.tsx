@@ -24,6 +24,7 @@ import PaymentStatus from "./pages/PaymentStatus";
 import JoinProviderNetwork from "./pages/JoinProviderNetwork";
 import NotFoundPage from "./pages/NotFoundPage";
 import FAQPage from "./pages/FAQPage";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 function App() {
   return (
@@ -57,6 +58,10 @@ function App() {
                   element={<ConfirmPlanDetails />}
                 />
                 <Route path="checkout" element={<Checkout />} />
+                <Route
+                  path="terms-and-condition"
+                  element={<TermsAndConditions />}
+                />
                 <Route path="payment-status" element={<PaymentStatus />} />
                 <Route path="faqs" element={<FAQPage />} />
                 <Route path="*" element={<NotFoundPage />} />
