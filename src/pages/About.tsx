@@ -2,7 +2,7 @@ import DynamicBreadcrumbSection from "../components/DynamicBreadcrumbSection";
 import bg from "../assets/png/aboutBreadcrumbBg.png";
 import WhoWeAre from "../components/WhoWeAre";
 import MissionVisionValue from "../components/MissionVisionValue";
-import OurTeam from "../components/OurTeam";
+// import OurTeam from "../components/OurTeam";
 import Clients from "../components/Clients";
 import CTA from "../components/CTA";
 
