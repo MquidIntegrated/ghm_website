@@ -6,18 +6,32 @@ import {Link} from "react-router-dom";
 
 const testimonials = [
   {
-    name: "Adebayo Musa",
+    name: "Oluwatobiloba",
     plan: "Ruby Health Plan",
-    location: "Abuja",
+    location: "Mquid integration solution",
     image: testimonialImg,
-    quote: `"GROOMING HMO has been a game-changer for my business. The flexible health plans give my employees peace of mind, which boosts morale and productivity. It’s an investment I’m proud to make!"`,
+    quote: `"Grooming HMO offers me affordable healthcare coverage that goes beyond just saving money. They provide exceptional benefits, especially for preventive care such as checkups, immunizations for my child , and screenings, while maintaining cost-effective premiums, ensuring I get great value and comprehensive care"`,
   },
   {
-    name: "Chinwe Okafor",
+    name: "Stanley",
     plan: "Emerald Health Plan",
-    location: "Lagos",
+    location: "Credit Star",
     image: testimonialImg,
-    quote: `"GROOMING HMO has been a game-changer for my business. The flexible health plans give my employees peace of mind, which boosts morale and productivity. It’s an investment I’m proud to make!"`,
+    quote: `"I want to express my sincere appreciation for the exceptional care our staffs received under grooming Health Maintenance Organization (HMO). Recently, our staffs had the opportunity to access medical services through the grooming HMO, and we are thoroughly impressed with the quality of care provided."`,
+  },
+  {
+    name: "Yusuf",
+    plan: "Ruby Health Plan",
+    location: "Staysafe Facilities Limited",
+    image: testimonialImg,
+    quote: `"Over the past year, GHML and my hospital have provided me with exceptional care and support, always ensuring my healthcare needs were met with professionalism and compassion"`,
+  },
+  {
+    name: "Okoli Fidelia",
+    plan: "Emerald Health Plan",
+    location: "GC",
+    image: testimonialImg,
+    quote: `"One thing I truly appreciate about my HMO, GHML, is their unwavering commitment to being available whenever I reach out. No matter the time or situation, they consistently respond promptly and provide the help I need"`,
   },
   // Add more testimonials as needed
 ];
@@ -60,17 +74,17 @@ const TestimonialSlider = () => {
             <p className="text-lg text-gray-600 italic mb-6">
               {testimonials[currentIndex].quote}
             </p>
-            <img
+            {/* <img
               src={testimonials[currentIndex].image}
               alt={testimonials[currentIndex].name}
               className="w-16 h-16 rounded-full mb-4"
-            />
+            /> */}
             <h3 className="font-semibold text-lg">
               {testimonials[currentIndex].name}
             </h3>
-            <p className="text-sm text-pink-600">
+            {/* <p className="text-sm text-pink-600">
               {testimonials[currentIndex].plan}
-            </p>
+            </p> */}
             <p className="text-sm text-gray-500">
               {testimonials[currentIndex].location}
             </p>
