@@ -1,5 +1,5 @@
-import DynamicBreadcrumbSection from "../components/DynamicBreadcrumbSection";
-import bg from "../assets/png/plansBreadcrumbBg.png";
+// import DynamicBreadcrumbSection from "../components/DynamicBreadcrumbSection";
+// import bg from "../assets/png/plansBreadcrumbBg.png";
 import OurPlans from "../components/OurPlans";
 import Clients from "../components/Clients";
 import CTA from "../components/CTA";

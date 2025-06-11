@@ -1,6 +1,6 @@
-import DynamicBreadcrumbSection from "../components/DynamicBreadcrumbSection";
-import bg from "../assets/png/individualPlansBreadcrumbBg.png";
-import CTA from "../components/CTA";
+// import DynamicBreadcrumbSection from "../components/DynamicBreadcrumbSection";
+// import bg from "../assets/png/individualPlansBreadcrumbBg.png";
+// import CTA from "../components/CTA";
 import RetailPlans from "../components/RetailPlans";
 
 const IndividualPlan = () => {
