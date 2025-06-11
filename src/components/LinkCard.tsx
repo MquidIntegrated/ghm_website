@@ -11,7 +11,7 @@ const LinkCard = ({imageSrc, title, buttonText, buttonLink}: LinkCardProps) => {
   return (
     <div
       style={{backgroundImage: `url(${imageSrc})`}}
-      className={`w-full max-w-[394.67px] mx-auto rounded-lg overflow-hidden shadow-lg bg-cover bg-center h-[500px] xl:h-[850px] relative flex flex-col justify-end`}
+      className={`w-full max-w-[394.67px] mx-auto rounded-lg overflow-hidden shadow-lg bg-cover bg-center h-[400px] xl:h-[560px] relative flex flex-col justify-end`}
       role="article"
       aria-labelledby="card-title"
     >

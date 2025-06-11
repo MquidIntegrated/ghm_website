@@ -34,7 +34,7 @@ const OurPlans = () => {
         <h2 className="text-ghmBlack font-semibold text-3xl md:text-4xl max-w-xl mb-4 md:mb-6">
           Explore Our Health Plans
         </h2>
-        <p className="text-ghmGrey-500 mb-10 md:mb-20">
+        <p className="text-ghmGrey-500 mb-10 md:mb-12 max-w-3xl">
           Our plans are designed with flexibility in mind, ensuring that you,
           your family, and your team have comprehensive insurance coverage
           whenever you need it. Enjoy easy access to care and support tailored

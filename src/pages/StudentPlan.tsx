@@ -37,7 +37,7 @@ const StudentPlan = () => {
         setIsFormSuccess("Form failed to submit. Please try again");
         setFormStatus(false);
       }
-      console.log("Response:", response.data);
+      // console.log("Response:", response.data);
     } catch (error) {
       console.error("Error during form submission:", error);
       setIsFormSuccess("Failed to submit the form.");

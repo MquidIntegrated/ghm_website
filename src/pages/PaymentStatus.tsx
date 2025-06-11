@@ -9,9 +9,9 @@ const PaymentStatus = () => {
   // const [paymentSuccess, setPaymentSuccess] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const transactionId = searchParams.get("transaction_id");
+    const transactionId = searchParams.get("reference");
     // const transactionStatus = searchParams.get("status");
-    console.log("transaction id to be passed", transactionId);
+    // console.log("transaction id to be passed", transactionId);
     if (transactionId) {
       // console.log("transaction id to be passed", transactionId);
       const timer = setTimeout(() => {
@@ -26,7 +26,7 @@ const PaymentStatus = () => {
       const response = await api.get(
         `/transaction/get-transaction-data?transaction_id=${transactionId}`
       );
-      console.log(response.data);
+      // console.log(response.data);
       setPaymentDetails(response.data.data);
     } catch (error) {
       console.error(error);
@@ -88,13 +88,13 @@ const PaymentStatus = () => {
       <div className="my-6 flex w-full justify-end space-x-4 max-w-4xl mx-auto">
         <Link
           to="/"
-          className="bg-ghmPurple-100 text-ghmPurple-300 px-8 py-2 rounded-full"
+          className="bg-ghmPurple-100 text-ghmPurple-300 px-5 md:px-8 py-2 rounded-full text-sm md:text-base"
         >
           Back to Homepage
         </Link>
         <Link
           to="/plans"
-          className="bg-ghmPurple-300 text-ghmPurple-100 px-8 py-2 rounded-full"
+          className="bg-ghmPurple-300 text-ghmPurple-100 px-5 md:px-8 py-2 rounded-full text-sm md:text-base"
         >
           View Our Plans
         </Link>

@@ -5,21 +5,24 @@ import MissionVisionValue from "../components/MissionVisionValue";
 // import OurTeam from "../components/OurTeam";
 import Clients from "../components/Clients";
 import CTA from "../components/CTA";
+import AllPlansCTA from "../components/AllPlansCTA";
 
 const About = () => {
   return (
     <div>
-      <DynamicBreadcrumbSection
+      {/* <DynamicBreadcrumbSection
         backgroundImage={bg}
         title="About Us"
         breadcrumbText="We secure your tomorrow today, 
 one client at a time"
-      />
+      /> */}
+
       <WhoWeAre />
+      {/* <AllPlansCTA /> */}
       <MissionVisionValue />
       {/* <OurTeam /> */}
       <Clients />
-      <CTA />
+      <AllPlansCTA />
     </div>
   );
 };

@@ -8,14 +8,14 @@ const membershipAndEnrollmentFaqs = [
       "You can purchase a health plan directly through our website. Simply select the plan that best suits your needs, whether individual or family and make payment. Our sales agent will contact you",
   },
   {
-    question: "How can I register my company for the health plan?",
+    question: "How can I buy a health plan for my company?",
     answer: (
       <>
-        You can register your company by submitting your details through this{" "}
-        <Link to="/contact" className="text-ghmPurple-700 underline">
-          link
+        To register your company, send us a message{" "}
+        <Link to="/plans/corporate" className="text-ghmPurple-700 underline">
+          here
         </Link>
-        . A sales agent will get in touch with you.
+        . A sales agent will contact you.
       </>
     ),
   },

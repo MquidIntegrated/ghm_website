@@ -57,7 +57,7 @@ const FamilyDetailsForm: React.FC = () => {
     const fetchPlans = async () => {
       try {
         const response = await api.get("/retail-plan/get-all-retail-plans");
-        console.log(response.data.data);
+        // console.log(response.data.data);
 
         setPlans(response.data.data);
       } catch (error) {

@@ -12,19 +12,19 @@ import FooterMenu from "./FooterMenu";
 const socialIcons = [
   {
     icon: facebook,
-    link: "#",
+    link: "https://www.facebook.com/people/Grooming-Health-Management/61560692680818/",
   },
   {
     icon: whatsapp,
-    link: "#",
+    link: "https://wa.me/2349087966271",
   },
   {
     icon: x,
-    link: "#",
+    link: "https://x.com/GroomingHMO",
   },
   {
     icon: instagram,
-    link: "#",
+    link: "https://www.instagram.com/groominghmo/",
   },
 ];
 
@@ -60,8 +60,10 @@ const Footer = () => {
           <h4 className="ghm-text-gradient mb-2 text-xl">Our Office</h4>
           <div className="flex justify-start space-x-3">
             <img src={address} alt="" className="self-start mt-1" />
-            <p className="text-ghmGrey-800 max-w-xs">
-              120 Ikotun-Egbe Road, Iyana Ejigbo, Lagos State, Nigeria
+            <p className="text-ghmGrey-800 max-w-xs hover:underline">
+              <a href="https://maps.app.goo.gl/cDWPeWcxLpv71HxB9">
+                120 Ikotun-Egbe Road, Iyana Ejigbo, Lagos State, Nigeria
+              </a>
             </p>
           </div>
         </div>
@@ -71,7 +73,10 @@ const Footer = () => {
           <h4 className="ghm-text-gradient mb-2 text-xl">Our Email</h4>
           <div className="flex justify-start space-x-3">
             <img src={email} alt="" />
-            <p className="text-ghmGrey-800">info@groominghm.com</p>
+            <p className="text-ghmGrey-800 hover:underline">
+              {" "}
+              <a href="mailto:info@groominghm.com">info@groominghm.com</a>
+            </p>
           </div>
         </div>
 
@@ -81,11 +86,17 @@ const Footer = () => {
           <div className="flex flex-col items-start space-y-2">
             <div className="flex justify-center md:justify-start space-x-3">
               <img src={phone} alt="" />
-              <p className="text-ghmGrey-800">+234 908 796 6270</p>
+              <p className="text-ghmGrey-800 hover:underline">
+                {" "}
+                <a href="tel:+2349087966270">+234 908 796 6270</a>
+              </p>
             </div>
             <div className="flex justify-center md:justify-start space-x-3">
               <img src={phone} alt="" />
-              <p className="text-ghmGrey-800">+234 908 796 6271</p>
+              <p className="text-ghmGrey-800 hover:underline">
+                {" "}
+                <a href="tel:+2349087966271">+234 908 796 6271</a>
+              </p>
             </div>
           </div>
         </div>

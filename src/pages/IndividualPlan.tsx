@@ -6,13 +6,13 @@ import RetailPlans from "../components/RetailPlans";
 const IndividualPlan = () => {
   return (
     <div>
-      <DynamicBreadcrumbSection
+      {/* <DynamicBreadcrumbSection
         backgroundImage={bg}
         title="Retail Plans"
         breadcrumbText="Plans to insure health at all levels"
-      />
+      /> */}
       <RetailPlans />
-      <CTA />
+      {/* <CTA /> */}
     </div>
   );
 };

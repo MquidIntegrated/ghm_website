@@ -24,12 +24,15 @@ const RetailPlans = () => {
         >
           View Full Details
         </Link>
-        <button className="ghm-bg-button-gradient group flex items-center space-x-2">
-          <span> Start Enjoying Our Health Plans</span>
+        <Link
+          to="/purchase-plan"
+          className="ghm-bg-button-gradient group flex items-center space-x-2"
+        >
+          <span> Select Multiple Plans</span>
           <span className="transform group-hover:translate-x-1 transition-transform duration-200">
             →
           </span>
-        </button>
+        </Link>
       </div>
     </div>
   );

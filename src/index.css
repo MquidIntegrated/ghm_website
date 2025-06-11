@@ -36,3 +36,7 @@
 .ghm-404-bg-gradient {
   @apply bg-gradient-to-bl from-white via-pink-100 to-white;
 }
+
+.ghm-all-plans-cta-bg-gradient {
+  @apply bg-gradient-to-t from-white via-pink-100 to-white;
+}

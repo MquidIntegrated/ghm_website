@@ -7,14 +7,14 @@ import CTA from "../components/CTA";
 const Plans = () => {
   return (
     <div>
-      <DynamicBreadcrumbSection
+      {/* <DynamicBreadcrumbSection
         backgroundImage={bg}
         title="Health Plans"
-        breadcrumbText="Plans to insure health at all levels"
-      />
+        breadcrumbText="Get full health coverage"
+      /> */}{" "}
       <OurPlans />
-      <Clients />
       <CTA />
+      <Clients />
     </div>
   );
 };

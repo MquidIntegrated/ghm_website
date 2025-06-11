@@ -40,16 +40,16 @@ const Checkout = () => {
     ) {
       navigate("/confirm-plan-details");
     }
-    console.log(
-      familySize,
-      persons,
-      paymentTotal,
-      discountedPriceTotal,
-      fullName,
-      email,
-      phoneNumber,
-      address
-    );
+    // console.log(
+    //   familySize,
+    //   persons,
+    //   paymentTotal,
+    //   discountedPriceTotal,
+    //   fullName,
+    //   email,
+    //   phoneNumber,
+    //   address
+    // );
   }, [persons, paymentTotal, fullName, email, phoneNumber, address]);
 
   const handlePayment = async () => {
@@ -91,7 +91,7 @@ const Checkout = () => {
         familySize,
         persons: validationData.validatedPersons || persons,
         paymentTotal: validationData.calculatedTotal,
-        discountedPriceTotal: 200000,
+        discountedPriceTotal,
         fullName,
         email,
         phoneNumber,
@@ -102,11 +102,11 @@ const Checkout = () => {
 
       // console.log(response);
 
-      if (response.data?.data?.data?.link) {
+      if (response.data?.data?.data?.authorization_url) {
         // Redirect user to the payment link
-        // console.log(response.data.data.data.link);
+        // console.log(response.data.data.data.authorization_url);
 
-        window.location.href = response.data.data.data.link;
+        window.location.href = response.data.data.data.authorization_url;
       } else {
         // console.log(response);
 

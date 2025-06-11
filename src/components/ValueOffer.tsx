@@ -49,17 +49,18 @@ const ValueOffer = () => {
     <div>
       <div className="ghm-container py-24">
         <h4 className="text-ghmPurple-300 mb-4 text-sm md:text-base">
-          Our Value Offer
+          Why Choose Us?
         </h4>
-        <h2 className="text-ghmBlack font-semibold text-3xl md:text-4xl max-w-lg mb-10">
+        {/* <h2 className="text-ghmBlack font-semibold text-3xl md:text-4xl max-w-lg mb-10">
           We Offer Comprehensive Health Insurance Services for Everyone
-        </h2>
-        <p className="text-ghmGrey-500 mb-10 md:mb-20">
-          GROOMING HMO provides health insurance for individuals, families,
-          SMEs, and large corporate organizations. We&apos;re setting new
-          standards in Health Insurance across Nigeria and Africa by adopting
-          global best practices. Whatever your Health Insurance needs, we have a
-          plan that works for you.
+        </h2> */}
+        <p className="text-ghmGrey-500 mb-10 md:mb-20 text-xl md:text-2xl">
+          At Grooming HMO, we offer comprehensive and affordable health
+          insurance tailored to individuals, families, SMEs, and large
+          businesses. Backed by a trusted network of hospitals and healthcare
+          providers, our flexible plans make quality healthcare simple, and
+          accessible. We are committed to putting your well-being first, every
+          step of the way.
         </p>
 
         {/* services grid */}
