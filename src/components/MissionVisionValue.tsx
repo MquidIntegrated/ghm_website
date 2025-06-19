@@ -29,7 +29,7 @@ const cardDetails: ICard[] = [
     icon: valueIcon,
     title: "Core Value",
     description:
-      "GHML is committed to leveraging on technology to provide affordable and premium health care services to all individuals in a timely manner.",
+      "SCRIPT (Sustainability, Customer Centric, Responsiveness, Integrity, Partnerships, Technology)",
   },
 ];
 
