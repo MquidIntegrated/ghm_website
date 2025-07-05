@@ -1,34 +1,28 @@
-import LinkCard from "./LinkCard";
-import retailPlan from "../assets/webp/retailPlan.webp";
-import studentPlan from "../assets/webp/studentPlan.webp";
-import corporatePlan from "../assets/webp/corporatePlan.webp";
-import {desc} from "framer-motion/client";
+// import LinkCard from "./LinkCard";
+// import retailPlan from "../assets/png/retailPlan.png";
+// import studentPlan from "../assets/png/studentPlan.png";
+// import corporatePlan from "../assets/png/corporatePlan.png";
 
-const linkCardProps = [
-  {
-    imageSrc: retailPlan,
-    title: "Retail Plans",
-    description: "Perfect for individuals and families — no employer needed.",
-    buttonText: "View Retail Plans",
-    buttonLink: "/plans/retail",
-  },
-  {
-    imageSrc: studentPlan,
-    title: "Student Plans",
-    description:
-      "Cover everything from routine checkups to emergencies for students.",
-    buttonText: "Learn More",
-    buttonLink: "/plans/student",
-  },
-  {
-    imageSrc: corporatePlan,
-    title: "Corporate Plans",
-    description:
-      "Comprehensive coverage, flexible options, and seamless onboarding for your staff",
-    buttonText: "Learn More",
-    buttonLink: "/plans/corporate",
-  },
-];
+// const linkCardProps = [
+//   {
+//     imageSrc: retailPlan,
+//     title: "Retail Plans",
+//     buttonText: "View Plans",
+//     buttonLink: "/plans/retail",
+//   },
+//   {
+//     imageSrc: studentPlan,
+//     title: "Student Plans",
+//     buttonText: "Learn More",
+//     buttonLink: "/plans/student",
+//   },
+//   {
+//     imageSrc: corporatePlan,
+//     title: "Corporate Plans",
+//     buttonText: "Learn More",
+//     buttonLink: "/plans/corporate",
+//   },
+// ];
 
 const OurPlans = () => {
   return (
@@ -49,16 +43,15 @@ const OurPlans = () => {
 
         {/* health plan cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-0">
-          {linkCardProps.map((linkCard, index) => (
+          {/* {linkCardProps.map((linkCard, index) => (
             <LinkCard
               key={index}
               imageSrc={linkCard.imageSrc}
               title={linkCard.title}
-              description={linkCard.description}
               buttonText={linkCard.buttonText}
               buttonLink={linkCard.buttonLink}
             />
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

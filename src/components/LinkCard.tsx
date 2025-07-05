@@ -3,36 +3,47 @@ import {Link} from "react-router-dom";
 interface LinkCardProps {
   imageSrc: string;
   title: string;
+  description: string;
   buttonText: string;
   buttonLink: string;
 }
 
-const LinkCard = ({imageSrc, title, buttonText, buttonLink}: LinkCardProps) => {
+const LinkCard = ({
+  imageSrc,
+  title,
+  description,
+  buttonText,
+  buttonLink,
+}: LinkCardProps) => {
   return (
     <div
-      style={{backgroundImage: `url(${imageSrc})`}}
-      className={`w-full max-w-[394.67px] mx-auto rounded-lg overflow-hidden shadow-lg bg-cover bg-center h-[400px] xl:h-[560px] relative flex flex-col justify-end`}
+      className="w-full max-w-sm mx-auto rounded-2xl overflow-hidden shadow-xl bg-white"
       role="article"
       aria-labelledby="card-title"
     >
-      {/* Gradient overlay instead of solid black for better depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
+      {/* Image container */}
+      <div className="relative h-52 overflow-hidden mx-2 rounded-2xl">
+        <img
+          src={imageSrc}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-      {/* Content container with proper spacing */}
-      <div className="relative p-4 z-10">
+      {/* Content container */}
+      <div className="p-6 space-y-4">
         <h2
           id="card-title"
-          className="text-white text-xl md:text-2xl font-semibold mb-3"
+          className="text-[#540D2D] text-xl md:text-2xl font-bold leading-tight"
         >
           {title}
         </h2>
 
-        <Link to={buttonLink} className="inline-block">
-          <button className="inline-flex items-center space-x-2 bg-white hover:bg-gray-400 text-ghmGrey-800 py-1.5 px-3 md:py-2 md:px-4 rounded-full transition-all duration-200 group text-sm md:text-base">
-            <span>{buttonText}</span>
-            <span className="transform group-hover:translate-x-1 transition-transform duration-200">
-              →
-            </span>
+        <p className=" text-sm md:text-base leading-relaxed">{description}</p>
+
+        <Link to={buttonLink} className="block">
+          <button className="w-full bg-ghmPurple-300 hover:bg-ghmPurple-200 text-white hover:text-black py-3 px-6 rounded-full transition-colors duration-200 font-medium text-sm md:text-base">
+            {buttonText}
           </button>
         </Link>
       </div>
