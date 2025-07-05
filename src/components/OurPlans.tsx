@@ -2,7 +2,6 @@ import LinkCard from "./LinkCard";
 import retailPlan from "../assets/webp/retailPlan.webp";
 import studentPlan from "../assets/webp/studentPlan.webp";
 import corporatePlan from "../assets/webp/corporatePlan.webp";
-import {desc} from "framer-motion/client";
 
 const linkCardProps = [
   {
