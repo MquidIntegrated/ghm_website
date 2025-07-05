@@ -88,7 +88,7 @@ const FamilyDetailsForm: React.FC = () => {
       if (value !== "") {
         setSelectedPlan(value);
         // Update all persons to have the same plan
-        updatedPersons.forEach((person, i) => {
+        updatedPersons.forEach((_, i) => {
           updatedPersons[i] = {
             ...updatedPersons[i],
             plan: value,
@@ -102,7 +102,7 @@ const FamilyDetailsForm: React.FC = () => {
       else if (value === "") {
         setSelectedPlan("");
         // Clear all persons' plans
-        updatedPersons.forEach((person, i) => {
+        updatedPersons.forEach((_, i) => {
           updatedPersons[i] = {
             ...updatedPersons[i],
             plan: "",
