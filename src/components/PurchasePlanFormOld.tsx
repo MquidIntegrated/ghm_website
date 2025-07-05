@@ -41,15 +41,24 @@ const FamilyDetailsForm: React.FC = () => {
     "Other",
   ];
 
+  // const planOptions = ["Gold", "Pearl", "Ruby", "Ruby Plus"];
+
+  // const planPrices: {[key: string]: number} = {
+  //   Gold: 1062500,
+  //   Pearl: 850000,
+  //   Ruby: 650000,
+  //   "Ruby Plus": 1200000,
+  // };
   const [plans, setPlans] = useState<{name: string; price: number}[]>([]);
   const [errors, setErrors] = useState<{[index: number]: boolean}>({});
-  const [selectedPlan, setSelectedPlan] = useState<string>("");
 
   useEffect(() => {
     // Fetch plans from the backend
     const fetchPlans = async () => {
       try {
         const response = await api.get("/retail-plan/get-all-retail-plans");
+        // console.log(response.data.data);
+
         setPlans(response.data.data);
       } catch (error) {
         console.error("Error fetching plans:", error);
@@ -59,65 +68,21 @@ const FamilyDetailsForm: React.FC = () => {
     fetchPlans();
   }, []);
 
-  // Function to determine the selected plan from existing persons
-  const determineSelectedPlan = (persons: PersonDetails[]) => {
-    const existingPlans = persons
-      .filter(person => person.plan !== "")
-      .map(person => person.plan);
-    if (existingPlans.length > 0) {
-      return existingPlans[0]; // Return the first non-empty plan
-    }
-    return "";
-  };
-
-  useEffect(() => {
-    // Update selected plan when persons change
-    const currentSelectedPlan = determineSelectedPlan(persons);
-    setSelectedPlan(currentSelectedPlan);
-  }, [persons]);
-
   const updatePerson = (
     index: number,
     key: keyof PersonDetails,
     value: any
   ) => {
     const updatedPersons = [...persons];
-
-    if (key === "plan") {
-      // When any person's plan is changed, update all persons to have the same plan
-      if (value !== "") {
-        setSelectedPlan(value);
-        // Update all persons to have the same plan
-        updatedPersons.forEach((person, i) => {
-          updatedPersons[i] = {
-            ...updatedPersons[i],
-            plan: value,
-            price: parseFloat(
-              plans.find(plan => plan.name === value)?.price.toString() || "0"
-            ),
-          };
-        });
-      }
-      // If clearing the plan (setting to empty), clear for all persons
-      else if (value === "") {
-        setSelectedPlan("");
-        // Clear all persons' plans
-        updatedPersons.forEach((person, i) => {
-          updatedPersons[i] = {
-            ...updatedPersons[i],
-            plan: "",
-            price: 0,
-          };
-        });
-      }
-    } else {
-      // For non-plan fields, update only the specific person
-      updatedPersons[index] = {
-        ...updatedPersons[index],
-        [key]: value,
-      };
-    }
-
+    updatedPersons[index] = {
+      ...updatedPersons[index],
+      [key]: value,
+      ...(key === "plan" && {
+        price: parseFloat(
+          plans.find(plan => plan.name === value)?.price.toString() || "0"
+        ),
+      }), // Automatically update price
+    };
     setPersons(updatedPersons);
 
     // Clear error if the field is valid
@@ -128,32 +93,30 @@ const FamilyDetailsForm: React.FC = () => {
     }
   };
 
+  // const deletePerson = (index: number) => {
+  //   const updatedPersons = persons.filter((_, i) => i !== index);
+  //   setPersons(updatedPersons);
+  // };
+
   useEffect(() => {
+    // console.log(discountedPriceTotal);
+
     const newSize = parseInt(familySize.split(" ")[2] || "1", 10);
     const updatedPersons = [...persons];
-
     while (updatedPersons.length < newSize) {
       updatedPersons.push({
         name: "",
         relationship: "",
         age: 0,
-        plan: selectedPlan, // Auto-assign the selected plan if one exists
-        price: selectedPlan
-          ? parseFloat(
-              plans
-                .find(plan => plan.name === selectedPlan)
-                ?.price.toString() || "0"
-            )
-          : 0,
+        plan: "",
+        price: 0,
       });
     }
-
     while (updatedPersons.length > newSize) {
       updatedPersons.pop();
     }
-
     setPersons(updatedPersons);
-  }, [familySize, selectedPlan, plans]);
+  }, [familySize]);
 
   const calculateTotal = () => {
     let total = persons.reduce((sum, person) => sum + person.price, 0);
@@ -175,7 +138,6 @@ const FamilyDetailsForm: React.FC = () => {
       discountPrice,
     };
   };
-
   const validateInputs = () => {
     const newErrors: {[index: number]: boolean} = {};
     persons.forEach((person, index) => {
@@ -186,16 +148,17 @@ const FamilyDetailsForm: React.FC = () => {
         isNaN(person.age) ||
         !person.plan
       ) {
-        newErrors[index] = true;
+        newErrors[index] = true; // Mark error for this person
       }
     });
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
   const handleContinue = async () => {
     if (validateInputs()) {
       try {
+        // Validate prices with backend before proceeding
         const response = await api.post("/retail-plan/validate-pricing", {
           familySize,
           persons,
@@ -208,9 +171,11 @@ const FamilyDetailsForm: React.FC = () => {
           return;
         }
 
+        // Update totals with validated amounts
         setPaymentTotal(data.calculatedTotal);
         setDiscountedPriceTotal(data.calculatedDiscountedTotal);
 
+        // Update persons with validated prices if needed
         if (data.validatedPersons) {
           setPersons(data.validatedPersons);
         }
@@ -220,6 +185,12 @@ const FamilyDetailsForm: React.FC = () => {
         alert("Failed to validate pricing. Please try again.");
         return;
       }
+      // const {total, discountPrice} = calculateTotal(); // Calculate total payment
+      // setPaymentTotal(total); // Store the total payment in the context
+      // setDiscountedPriceTotal(discountPrice);
+      // navigate("/confirm-plan-details");
+      // console.log("Submitted Data:", {persons, total});
+      // Proceed to the next step
     } else {
       alert("Please fill all the required fields!");
     }
@@ -244,16 +215,6 @@ const FamilyDetailsForm: React.FC = () => {
           </select>
         </div>
 
-        {/* Selected Plan Information */}
-        {selectedPlan && (
-          <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-sm text-blue-800">
-              <strong>Selected Plan:</strong> {selectedPlan} - This plan will be
-              applied to all family members.
-            </p>
-          </div>
-        )}
-
         {persons.map((person, index) => (
           <div
             key={index}
@@ -263,6 +224,7 @@ const FamilyDetailsForm: React.FC = () => {
             <div>
               <label className="text-sm text-ghmGrey-500">Buying For</label>
               <div className="relative">
+                {" "}
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                   <img src={nameIcon} alt="" />
                 </div>
@@ -332,11 +294,6 @@ const FamilyDetailsForm: React.FC = () => {
                   </option>
                 ))}
               </select>
-              {/* {selectedPlan !== "" && (
-                <p className="text-xs text-gray-500 mt-1">
-                  Changing this will update all family members to {selectedPlan}
-                </p>
-              )} */}
             </div>
 
             {/* price  */}
@@ -354,9 +311,15 @@ const FamilyDetailsForm: React.FC = () => {
                     className="p-2 ps-7 border rounded-full w-full bg-gray-100"
                   />
                 </div>
+
+                {/* <button
+                onClick={() => deletePerson(index)}
+                className="text-red-500 ml-2"
+              >
+                <img src={trashIcon} alt="" />
+              </button> */}
               </div>
             </div>
-
             {/* Error Message */}
             {errors[index] && (
               <p className="text-red-500 text-sm mt-2 text-nowrap">
@@ -366,7 +329,6 @@ const FamilyDetailsForm: React.FC = () => {
           </div>
         ))}
       </div>
-
       {/* payment total  */}
       <div className="mt-4 flex items-center justify-between max-w-4xl">
         <p className="text-lg font-semibold">Payment Total:</p>
@@ -374,14 +336,13 @@ const FamilyDetailsForm: React.FC = () => {
           ₦ {calculateTotal().total.toLocaleString()}
         </p>
       </div>
-
       {/* discounted price total */}
       {calculateTotal().total !== calculateTotal().discountPrice &&
         calculateTotal().discountPrice > 0 && (
           <div className="mt-4 flex items-center justify-between max-w-4xl">
             <p className="text-lg font-semibold">Discounted Price:</p>
             <p className="text-lg font-semibold">
-              ₦ {calculateTotal().discountPrice.toLocaleString()}
+              <p> ₦ {calculateTotal().discountPrice.toLocaleString()}</p>
             </p>
           </div>
         )}
