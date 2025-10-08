@@ -23,13 +23,13 @@ const cardDetails: ICard[] = [
     icon: visionIcon,
     title: "Our Vision",
     description:
-      "Our vision is to be a leader in innovative health management, delivering comprehensive and integrated care that promotes lifelong wellness and vitality.",
+      "To be a leader in innovative healthcare management for financial risk protection and integrated care in Nigeria",
   },
   {
     icon: valueIcon,
     title: "Core Value",
     description:
-      "SCRIPT (Sustainability, Customer Centric, Responsiveness, Integrity, Partnerships, Technology)",
+      "PRECISE (Partnership, Responsiveness, Equity, Customer Centric, Innovations, Sustainability and Ethics)",
   },
 ];
 
