@@ -41,7 +41,7 @@ const Footer = () => {
           />
           <p className="ghm-text-gradient mb-6 md:mb-0">
             As a reputable HMO, we are committed to delivering high-quality
-            Health Insurance that prioritize the well-being of our clients.
+            Healthcare Coverage that prioritize the well-being of our clients.
           </p>
         </div>
         <div className="hidden md:block">
