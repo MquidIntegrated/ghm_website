@@ -32,6 +32,7 @@ const menuItems: MenuItem[] = [
     dropdown: [
       {label: "Contact", to: "/contact"},
       {label: "FAQs", to: "/faqs"},
+      {label: "Whistleblowing", to: "/whistleblowing"},
     ],
   },
   // {label: "Contact", to: "/contact"},

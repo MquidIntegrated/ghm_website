@@ -39,20 +39,20 @@ const faqs = [
     answer:
       "After successful registration, your policy number is sent to your registered email. If you do not receive it within 24hrs, please contact our call center (09087966270 or 09087966271) for assistance.",
   },
-  {
-    question: "How can I view the benefits of my health plan?",
-    answer: (
-      <>
-        You can view the benefits of your health plan by clicking{" "}
-        <Link
-          to="/plans/retail/full-plan-details"
-          className="text-ghmPurple-700 underline"
-        >
-          health plans.
-        </Link>
-      </>
-    ),
-  },
+  // {
+  //   question: "How can I view the benefits of my health plan?",
+  //   answer: (
+  //     <>
+  //       You can view the benefits of your health plan by clicking{" "}
+  //       <Link
+  //         to="/plans/retail/full-plan-details"
+  //         className="text-ghmPurple-700 underline"
+  //       >
+  //         health plans.
+  //       </Link>
+  //     </>
+  //   ),
+  // },
 ];
 
 const FAQs = () => {

@@ -7,6 +7,7 @@ import facebook from "../assets/svg/facebook.svg";
 import whatsapp from "../assets/svg/whatsapp.svg";
 import x from "../assets/svg/x.svg";
 import instagram from "../assets/svg/instagram.svg";
+import auditCompliance from "../assets/png/auditCompliance.png";
 import FooterMenu from "./FooterMenu";
 
 const socialIcons = [
@@ -41,11 +42,16 @@ const Footer = () => {
           />
           <p className="ghm-text-gradient mb-6 md:mb-0">
             As a reputable HMO, we are committed to delivering high-quality
-            Healthcare Coverage that prioritize the well-being of our clients.
+            healthcare coverage that prioritize the well-being of our clients.
           </p>
         </div>
-        <div className="hidden md:block">
-          <img src={cross} alt="footer cross" />
+        <div className="flex justify-between w-full">
+          <img src={cross} alt="footer cross" className="hidden md:block" />
+          <img
+            src={auditCompliance}
+            alt="audit compliance"
+            className="h-36 md:h-28 xl:h-48"
+          />
         </div>
       </div>
 

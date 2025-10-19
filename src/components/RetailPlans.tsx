@@ -18,12 +18,12 @@ const RetailPlans = () => {
 
       <RetailPlansCarousel />
       <div className="flex flex-col items-center space-y-4 mt-16">
-        <Link
+        {/* <Link
           to="/plans/retail/full-plan-details"
           className="text-ghmPurple-500 underline hover:no-underline cursor-pointer"
         >
           View Full Details
-        </Link>
+        </Link> */}
         <Link
           to="/purchase-plan"
           className="ghm-bg-button-gradient group flex items-center space-x-2"

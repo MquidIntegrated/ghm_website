@@ -41,20 +41,20 @@ const membershipAndEnrollmentFaqs = [
 ];
 
 const coverageFaqs = [
-  {
-    question: "How can I view the benefits of my health plan?",
-    answer: (
-      <>
-        You can view the benefits of your health plan by clicking{" "}
-        <Link
-          to="/plans/retail/full-plan-details"
-          className="text-ghmPurple-700 underline"
-        >
-          health plans.
-        </Link>
-      </>
-    ),
-  },
+  // {
+  //   question: "How can I view the benefits of my health plan?",
+  //   answer: (
+  //     <>
+  //       You can view the benefits of your health plan by clicking{" "}
+  //       <Link
+  //         to="/plans/retail/full-plan-details"
+  //         className="text-ghmPurple-700 underline"
+  //       >
+  //         health plans.
+  //       </Link>
+  //     </>
+  //   ),
+  // },
   {
     question: "How can I find the list of excluded benefits under my plan?",
     answer:

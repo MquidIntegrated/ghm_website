@@ -25,6 +25,7 @@ import JoinProviderNetwork from "./pages/JoinProviderNetwork";
 import NotFoundPage from "./pages/NotFoundPage";
 import FAQPage from "./pages/FAQPage";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import Whistleblowing from "./pages/Whistleblowing";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="about" element={<About />} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="whistleblowing" element={<Whistleblowing />} />
                 <Route path="providers-list" element={<ProvidersList />} />
                 <Route
                   path="join-provider-network"
@@ -45,10 +47,10 @@ function App() {
                 />
                 <Route path="plans" element={<Plans />} />
                 <Route path="plans/retail" element={<IndividualPlan />} />
-                <Route
+                {/* <Route
                   path="plans/retail/full-plan-details"
                   element={<FullPlanDetails />}
-                />
+                /> */}
                 <Route path="plans/student" element={<StudentPlan />} />
                 <Route path="plans/corporate" element={<CorporatePlan />} />
 
