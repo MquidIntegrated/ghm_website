@@ -1,7 +1,7 @@
 import {useState} from "react";
 import nameIcon from "../assets/svg/userContactForm.svg";
 import mailIcon from "../assets/svg/mailContactForm.svg";
-import deal from "../assets/svg/deal.svg";
+// import deal from "../assets/svg/deal.svg";
 import api from "../utils/ApiBaseUrl";
 import phone from "../assets/svg/phone.svg";
 

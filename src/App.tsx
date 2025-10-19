@@ -10,7 +10,7 @@ import Header from "./components/Header";
 import About from "./pages/About";
 import Plans from "./pages/Plans";
 import IndividualPlan from "./pages/IndividualPlan";
-import FullPlanDetails from "./pages/FullPlanDetails";
+// import FullPlanDetails from "./pages/FullPlanDetails";
 import StudentPlan from "./pages/StudentPlan";
 import CorporatePlan from "./pages/CorporatePlan";
 import Contact from "./pages/Contact";
