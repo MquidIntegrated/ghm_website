@@ -230,8 +230,10 @@ const Whistleblowing = () => {
           <div className="mt-10 text-ghmGrey-700">
             <p>
               Download our whistleblowing policy{" "}
-              <span>
-                <a href="">here</a>
+              <span className="underline hover:no-underline">
+                <a href="/pdfs/whistleblowing-policy.pdf" download>
+                  here
+                </a>
               </span>{" "}
               .
             </p>
